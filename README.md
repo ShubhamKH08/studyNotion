@@ -1,15 +1,9 @@
 # StudyNotion
 
-## Running the Project
-
+## How to run the project ?
 To run vite project use following commands:
 
----
-cd studyNosion
-
-npm run dev
-
----
-
-3. Once the server is running, copy the URL displayed in the terminal and paste it into your browser to view the StudyNotion page.
-
+- cd studyNosion
+- npm install -g vite
+- npm install vite --save-dev
+- npm run dev
