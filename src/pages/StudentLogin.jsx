@@ -5,7 +5,7 @@ export default function StudentLogin()
 {
     return(
         <>
-            <h1>StudentLogin</h1>
+            <h1>StudentLogin Page</h1>
         </>
     )
 }
