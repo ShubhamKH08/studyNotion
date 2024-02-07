@@ -1,42 +1,51 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+/*---------------------------
+       Google Fonts
+---------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat&family=Poppins&display=swap');
+
+
+/*---------------------------
+	   CSS Variables
+---------------------------*/
+:root {
+  --primary-bg: #000814;
+  --secondary-bg: #2C333F;
+  --primary-text-color: #F1F2FF;
+  --secondary-text-color: #FFD60A;
+  --third-text-color: #47A5C5;
+  --fourth-text-color: #AFB2BF;
+  --big-font: 1.3rem;
+  --medium-font: 1.2rem;
+  --normal-font: 0.9rem;
+  --small-font: 1rem;
+  --main-font: 'Inter', sans-serif;
+  --primary-font: 'Montserrat', sans-serif;
+  --secondary-font: 'Montserrat', sans-serif;
+  --third-font: 'Montserrat', sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+html {
+  scroll-behavior: smooth;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ul,
+ol {
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
+:active,
+:hover,
+:focus {
+  outline: 0 !important;
+  outline-offset: 0 !important;
+  opacity: 100% !important;
+}  
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+body {
+  background-color: var(--primary-bg);
+  font: var(--primary-font);
+  color: var(--primary-text-color);
 }
