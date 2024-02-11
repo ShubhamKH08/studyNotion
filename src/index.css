@@ -70,3 +70,11 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+@layer utilities {
+  .font-pacifico {
+    font-family: 'Pacifico', cursive;
+    font-style: italic;
+    color: #47A5C5;
+  }
+}
