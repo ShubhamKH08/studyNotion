@@ -25,27 +25,3 @@
   --third-font: 'Montserrat', sans-serif;
 }
 
-
-html {
-  scroll-behavior: smooth;
-}
-
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-}
-
-:active,
-:hover,
-:focus {
-  outline: 0 !important;
-  outline-offset: 0 !important;
-  opacity: 100% !important;
-}  
-
-body {
-  background-color: var(--primary-bg);
-  font: var(--primary-font);
-  color: var(--primary-text-color);
-}
