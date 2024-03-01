@@ -1,10 +1,18 @@
 
-const Button = (type, text, onClick)=> {
+import React from "react";
+
+const Button = ({ type, text, onClick }) => {
   return (
     <div>
-        <button type={type} onClick={onClick} className="rounded-xl bg-secondaryText hover:bg-yellow-500  text-blackText text-center text-xl hover:scale-105 duration-75">{text}</button>
+      <button
+        type={type}
+        onClick={onClick}
+        className="rounded-md bg-yellow-400 hover:opacity-90 text-gray-900 text-center text-sm font-medium transition-transform duration-300 ease-in-out transform-gpu w-full h-12"
+      >
+        {text}
+      </button>
     </div>
-  )
-}
+  );
+};
 
 export default Button;

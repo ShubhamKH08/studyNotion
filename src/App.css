@@ -25,3 +25,6 @@
   --third-font: 'Montserrat', sans-serif;
 }
 
+body {
+  background-color: var(--primary-bg);
+}

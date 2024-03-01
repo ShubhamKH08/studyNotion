@@ -9,15 +9,12 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -36,6 +33,10 @@
   .font-pacifico {
     font-family: 'Pacifico', cursive;
     font-style: italic;
+    color: #47A5C5;
+  }
+  
+  .custom-blue-text-color {
     color: #47A5C5;
   }
 }

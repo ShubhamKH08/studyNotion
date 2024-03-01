@@ -2,13 +2,13 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import StudentSignUpImg from "../assets/StudentSignUpImg.png";
+import InstructorSignUpImg from "../assets/InstructorSignUpImg.png";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { IoIosInformationCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-export default function StudentSignUp() {
+export default function InstructorSignUp() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -23,7 +23,7 @@ export default function StudentSignUp() {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword); 
+    setShowPassword(!showPassword);
   };
 
   const {
@@ -38,13 +38,14 @@ export default function StudentSignUp() {
   };
 
   const onSubmit = (data) => {
+    // Handle form submission logic here
     console.log(data);
   };
 
   const navigate = useNavigate();
 
-  const handleStudentLogin = () => {
-    navigate("/instuctorsignup");
+  const handleStudentSignUp = () => {
+    navigate("/studentsignup");
   };
 
   const [showNote, setShowNote] = useState(false);
@@ -61,24 +62,23 @@ export default function StudentSignUp() {
             <div className="flex flex-col justify-center items-center text-center sm:text-left md:text-left lg:text-left">
               <div className="lg:mt-10 lg:ml-36 w-8/12">
                 <h1 className="font-medium text-2xl sm:text-3xl md:text-4xl lg:text-4xl">
-                  Join the millions learning to code with StudyNotion for free
+                  Welcome Back
                 </h1>
                 <div className="opacity-90 mb-0.5">
                   <p className="mb-0.5 mt-3 text-xs sm:text-base md:text-lg lg:text-base text-rose-100 leading-3 lg:mt-4 tracking-wide">
-                    Build skills for today, tomorrow, and beyond.
+                    Discover your passions,
                     <span className="font-pacifico block leading-3 opacity-100">
-                      {" "}
-                      Education to future-proof your career.
+                      Be Unstoppable
                     </span>
                   </p>
                 </div>
 
                 <div className="flex justify-center items-center mt-8">
                   <button
-                    onClick={handleStudentLogin}
+                    onClick={handleStudentSignUp}
                     className="bg-gray-900 border-1 border-yellow-100 rounded-3xl px-8 py-2 hover:opacity-90"
                   >
-                    Go to Instructor SignUp
+                    Go to Student SignUp
                   </button>
                 </div>
 
@@ -130,8 +130,8 @@ export default function StudentSignUp() {
                         label="Country Code"
                         type="text"
                         placeholder="+91"
-                        value={formData.countryCode}
                         required={true}
+                        value={formData.countryCode}
                         onChange={(e) =>
                           handleChange({
                             target: {
@@ -204,7 +204,7 @@ export default function StudentSignUp() {
                       <InputField
                         label="Account Type"
                         type="text"
-                        value={"Student"}
+                        value={"Instructor"}
                         onChange={handleChange}
                         errorMessage={errors.accountType?.message}
                         showError={!!errors.accountType}
@@ -250,7 +250,7 @@ export default function StudentSignUp() {
                   <br />
                   <Button type="submit" text="Create Account" />
                   <Link
-                    to="/studentlogin"
+                    to="/instructorlogin"
                     className="flex justify-center items-center mt-2 custom-blue-text-color lg:text-xs mb-8 hover:underline hover:underline-offset-4"
                   >
                     Already have an account? Login here
@@ -262,7 +262,7 @@ export default function StudentSignUp() {
             <div className="flex justify-center items-center mt-0.5">
               <div className="flex justify-center items-center">
                 <img
-                  src={StudentSignUpImg}
+                  src={InstructorSignUpImg}
                   alt="Student Signup"
                   className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-3xl"
                 />
