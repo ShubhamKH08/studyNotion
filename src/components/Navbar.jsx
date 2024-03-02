@@ -1,6 +1,5 @@
-
 import Logo from "../assets/Logo.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
@@ -8,59 +7,95 @@ import { IoSearch } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 
 function Navbar() {
-  const [searchBar, setSearchBar]= useState(false);
-  
+  const [searchBar, setSearchBar] = useState(false);
+  const [ifSignedIn, setIfSignedIn] = useState(false);
+
   const handleSearchBarToggle = () => {
     setSearchBar(!searchBar);
-  }
+  };
+
+  useEffect(() => {
+    var token = localStorage.getItem("token");
+    if (token) {
+      setIfSignedIn(true);
+    }
+  }, []); // <--- Added empty dependency array to ensure useEffect runs only once
+
+  // Define array for menu items and sub-menu items
+  const menuItems = [
+    { title: "Home", link: "/" },
+    { title: "Catalog", subMenu: ["A", "B", "C"] },
+    { title: "About Us", link: "/about" },
+    { title: "Contact Us", link: "/contact" },
+  ];
 
   return (
-    <div className="px-8 bg-gray-800 p-4 flex flex-wrap justify-between items-center w-screen">
-      <div className="flex items-center space-x-4">
-        <div className="text-white text-2xl font-bold flex items-center gap-2">
-          <img src={Logo} className="h-10 w-10 relative" alt="Logo" />
-          <span className="text-2xl text-white relative inset-0 font-normal">
+    <div className="px-8  bg-topBar py-3 flex justify-between items-center w-screen ">
+      <div className="flex items-center space-x-4 ml-4">
+        <div className="text-white text-2xl font-bold flex items-center gap-2 ">
+          <img src={Logo} className="h-8 w-8 relative " alt="Logo" />
+          <span className="md:text-xl xl:text-2xl  text-white relative inset-0 font-thin">
             StudyNotion
           </span>
         </div>
       </div>
-      <div className="flex space-x-4 text-white gap-4">
-        <Link to="/" className="text-white hover:text-yellow-400 text-xl font-light">
-          Home
-        </Link>
-        <div className="relative group hover:text-yellow-400">
-          <span className="hover:text-yellow-400 cursor-pointer flex items-center gap-1 text-xl font-light group">Catalog<IoIosArrowDown className="w-4 h-4 font-bold group-hover:rotate-180 duration-300"/></span>
-          <div className="absolute bg-gray-900 group-hover:block hidden p-2 top-full left-0 w-32 duration-200 rounded-md opacity-95">
-            <Link to="/catalog/a" className="block text-white py-2 hover:text-yellow-400">
-              A
-            </Link>
-            <Link to="/catalog/b" className="block text-white py-2 hover:text-yellow-400">
-              B
-            </Link>
-            <Link to="/catalog/c" className="block text-white py-2 hover:text-yellow-400">
-              C
-            </Link>
+      <div className="space-x-4 text-white flex gap-4 ">
+        {menuItems.map((menuItem, index) => (
+          <div key={index} className="relative group hover:text-yellow-600 text-topbarText">
+            {menuItem.subMenu ? (
+              <div>
+                <span className=" hover:text-yellow-600 text-topbarText cursor-pointer flex items-center gap-1 lg:text-xl font-thin ">
+                  {menuItem.title}
+                  <IoIosArrowDown className="w-4 h-4 font-bold " />
+                </span>
+                <div className="absolute rounded-xl -translate-x-4 text-gray-700 bg-gray-100 group-hover:block hidden p-2 top-full left-0 w-32 duration-200 font-thin">
+                  {menuItem.subMenu.map((subMenuItem, subIndex) => (
+                    <Link
+                      key={subIndex}
+                      to={`/catalog/${subMenuItem.toLowerCase()}`}
+                      className="block text-black py-1 hover:scale-105 duration-100"
+                    >
+                      {subMenuItem}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <Link
+                to={menuItem.link}
+                className="text-topbarText hover:text-yellow-600 text-xl font-thin"
+              >
+                {menuItem.title}
+              </Link>
+            )}
           </div>
-        </div>
-        <Link to="/about" className="text-white hover:text-yellow-400 text-xl font-light">
-          About Us
-        </Link>
-        <Link to="/contact" className="text-white hover:text-yellow-400 text-xl font-light">
-          Contact Us
-        </Link>
+        ))}
       </div>
 
-      <div className="flex items-center space-x-4 cursor-pointer">
-        { searchBar && 
+      <div className=" mr-4 flex items-center space-x-6 cursor-pointer">
+        {searchBar && (
           <input
             type="text"
             placeholder="Search"
-            className="bg-gray-700 text-white px-3 py-1 rounded-md"
+            className="bg-gray-700 text-white px-3 py-1 rounded-md duration-75"
           />
-        }
-        <IoSearch className="w-6 h-6 text-gray-400 font-light" onClick={handleSearchBarToggle} />  
-        <div className="text-white cursor-pointer"><IoCartOutline className="w-6 h-6 text-gray-400 font-light" /></div>
-        <div className="text-white cursor-pointer"><Link to="/studentlogin"><CgProfile className="w-7 h-7 text-gray-300 font-light"/></Link></div>
+        )}
+        <IoSearch
+          className="w-6 h-6 bg-slate-200 bg-transparent"
+          onClick={handleSearchBarToggle}
+        />
+        <div className="text-white cursor-pointer">
+          <IoCartOutline className="w-6 h-6 bg-slate-200 bg-transparent" />
+        </div>
+        <div className=" text-gray-300 cursor-pointer">
+          {ifSignedIn ? (
+            <CgProfile className="w-8 h-8 text-gray-100 bg-transparent" />
+          ) : (
+            <button className="p-1 rounded-md font-thin border-boxBorder border ">
+              Sign In
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
