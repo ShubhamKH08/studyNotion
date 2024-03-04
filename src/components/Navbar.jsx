@@ -44,9 +44,9 @@ function Navbar() {
           <div key={index} className="relative group hover:text-yellow-600 text-topbarText">
             {menuItem.subMenu ? (
               <div>
-                <span className=" hover:text-yellow-600 text-topbarText cursor-pointer flex items-center gap-1 lg:text-xl font-thin ">
+                <span className="group hover:text-yellow-600 text-topbarText cursor-pointer flex items-center gap-1 lg:text-xl font-thin ">
                   {menuItem.title}
-                  <IoIosArrowDown className="w-4 h-4 font-bold " />
+                  <IoIosArrowDown className="w-4 h-4 font-bold group-hover:translate-y-1 duration-75" />
                 </span>
                 <div className="absolute rounded-xl -translate-x-4 text-gray-700 bg-gray-100 group-hover:block hidden p-2 top-full left-0 w-32 duration-200 font-thin">
                   {menuItem.subMenu.map((subMenuItem, subIndex) => (
@@ -91,9 +91,9 @@ function Navbar() {
           {ifSignedIn ? (
             <CgProfile className="w-8 h-8 text-gray-100 bg-transparent" />
           ) : (
-            <button className="p-1 rounded-md font-thin border-boxBorder border ">
+           <Link to="/studentlogin"> <button className="p-1 rounded-md font-thin border-boxBorder border ">
               Sign In
-            </button>
+            </button></Link>
           )}
         </div>
       </div>
