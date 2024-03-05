@@ -44,8 +44,8 @@ function InstructorLogin() {
     <>
       <div className="mt-12 w-screen flex flex-wrap flex-row place-items-center">
         <section id="home" className="w-full px-16 sm:px-0">
-          <div className="container mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-            <div className="flex flex-col justify-center items-center text-center sm:text-left md:text-left lg:text-left">
+          <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex flex-col justify-center items-center text-left">
               <div className="lg:ml-36 w-6/12">
                 <h1 className="font-medium text-2xl sm:text-3xl md:text-4xl lg:text-4xl">
                   Welcome Back
@@ -69,7 +69,7 @@ function InstructorLogin() {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-8 w-full">
                   <InputField
                     label="Email Address"
                     type="email"  

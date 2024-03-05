@@ -58,7 +58,7 @@ export default function InstructorSignUp() {
     <>
       <div className="mt-12 w-screen flex flex-wrap flex-row place-items-center">
         <section id="home" className="w-full px-16 sm:px-0">
-          <div className="container mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+          <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col justify-center items-center text-center sm:text-left md:text-left lg:text-left">
               <div className="lg:mt-10 lg:ml-36 w-8/12">
                 <h1 className="font-medium text-2xl sm:text-3xl md:text-4xl lg:text-4xl">
@@ -83,8 +83,8 @@ export default function InstructorSignUp() {
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
-                  <div className="flex gap-4">
-                    <div className="w-1/2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="w-full">
                       <InputField
                         label="First Name"
                         type="text"
@@ -97,7 +97,7 @@ export default function InstructorSignUp() {
                         required={true}
                       />
                     </div>
-                    <div className="w-1/2">
+                    <div className="w-full">
                       <InputField
                         label="Last Name"
                         type="text"
@@ -124,8 +124,8 @@ export default function InstructorSignUp() {
                     required={true}
                   />
 
-                  <div className="flex gap-4">
-                    <div className="w-1/4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="w-full">
                       <InputField
                         label="Country Code"
                         type="text"
@@ -146,7 +146,7 @@ export default function InstructorSignUp() {
                         defaultvalue="+91"
                       />
                     </div>
-                    <div className="w-3/4">
+                    <div className="w-full">
                       <InputField
                         label="Phone Number"
                         type="tel"
@@ -168,8 +168,8 @@ export default function InstructorSignUp() {
                     </div>
                   </div>
 
-                  <div className="flex gap-4">
-                    <div className="w-1/2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="w-full">
                       <InputField
                         label="Create Password"
                         type={showPassword ? "text" : "password"}
@@ -183,7 +183,7 @@ export default function InstructorSignUp() {
                         required={true}
                       />
                     </div>
-                    <div className="w-1/2">
+                    <div className="w-full">
                       <InputField
                         label="Confirm Password"
                         type={showPassword ? "text" : "password"}
@@ -199,8 +199,8 @@ export default function InstructorSignUp() {
                     </div>
                   </div>
 
-                  <div className="flex gap-4">
-                    <div className="w-1/2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="w-full">
                       <InputField
                         label="Account Type"
                         type="text"
@@ -212,7 +212,7 @@ export default function InstructorSignUp() {
                         disabled={true}
                       />
                     </div>
-                    <div className="w-1/2">
+                    <div className="w-full">
                       <InputField
                         label="OTP"
                         type="text"
