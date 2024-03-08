@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import StudentSignUpImg from "../assets/StudentSignUpImg.png";
@@ -7,15 +7,18 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { IoIosInformationCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
+import axios from "axios"
 
 export default function StudentSignUp() {
+  
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
-    accountType: "",
+    accountType: "Student",
     contactNumber: "",
     otp: "",
   });
@@ -27,7 +30,6 @@ export default function StudentSignUp() {
   };
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -37,14 +39,28 @@ export default function StudentSignUp() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const handleVerifyEmail = async ()=>{
+    try{
+      const response = await axios.post("http://localhost:4000/api/v1/auth/sendotp",{email:formData.email})
+      console.log('Email verified: ', response)
+    }catch(e){
+      console.log('Error:',e)
+    }
+  }
+
+  const onSubmit = async () => {
+    try{
+      const response = await axios.post("http://localhost:4000/api/v1/auth/signup",formData)
+      console.log('Successfully registered: ', response)
+      navigate.push('/studentlogin')
+    }catch(e){
+      console.log('Error:',e)
+    }
   };
 
-  const navigate = useNavigate();
 
   const handleStudentLogin = () => {
-    navigate("/instructorsignup");
+    navigate("/instuctorsignup");
   };
 
   const [showNote, setShowNote] = useState(false);
@@ -52,7 +68,6 @@ export default function StudentSignUp() {
   const toggleNoteVisibility = () => {
     setShowNote(!showNote);
   };
-
   return (
     <>
       <div className="mt-12 w-screen flex flex-wrap flex-row place-items-center">
@@ -123,6 +138,10 @@ export default function StudentSignUp() {
                     name="email"
                     required={true}
                   />
+                  <Button
+                    text="Verify Email"
+                     onClick={handleVerifyEmail}
+                   ></Button>
 
                   <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
                     <div className="w-full">
@@ -274,3 +293,5 @@ export default function StudentSignUp() {
     </>
   );
 }
+
+

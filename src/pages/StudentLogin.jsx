@@ -1,20 +1,22 @@
 
-import React, { useState } from "react";
+
+import  { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import StudentLoginImg from "../assets/StudentLoginImg.png";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
+import axios from "axios"
 
 function StudentLogin() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -24,11 +26,19 @@ function StudentLogin() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async() => {
+    try{
+      console.log('data:',formData)
+    const response  = await axios.post("http://localhost:4000/api/v1/auth/login",formData);
+      console.log(response);
+      navigate.push('/')
+  }
+    catch(err){
+    console.log(err);
+    }
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleInstructorLogin = () => {
     navigate("/instructorlogin");
@@ -120,5 +130,7 @@ function StudentLogin() {
     </>
   );
 }
-
 export default StudentLogin;
+
+
+
