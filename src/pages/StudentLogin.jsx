@@ -31,7 +31,7 @@ function StudentLogin() {
       console.log('data:',formData)
     const response  = await axios.post("http://localhost:4000/api/v1/auth/login",formData);
       console.log(response);
-      navigate.push('/')
+      navigate('/')
   }
     catch(err){
     console.log(err);

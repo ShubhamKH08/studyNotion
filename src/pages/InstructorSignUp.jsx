@@ -151,7 +151,7 @@ export default function InstructorSignUp() {
                         label="Phone Number"
                         type="tel"
                         placeholder="Enter phone number"
-                        value={formData.phoneNumber}
+                        value={formData.contactNumber}
                         required={true}
                         onChange={(e) =>
                           handleChange({

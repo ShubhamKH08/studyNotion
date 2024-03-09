@@ -52,7 +52,7 @@ export default function StudentSignUp() {
     try{
       const response = await axios.post("http://localhost:4000/api/v1/auth/signup",formData)
       console.log('Successfully registered: ', response)
-      navigate.push('/studentlogin')
+      navigate('/studentlogin')
     }catch(e){
       console.log('Error:',e)
     }
@@ -170,7 +170,7 @@ export default function StudentSignUp() {
                         label="Phone Number"
                         type="tel"
                         placeholder="Enter phone number"
-                        value={formData.phoneNumber}
+                        value={formData.contactNumber}
                         required={true}
                         onChange={(e) =>
                           handleChange({
