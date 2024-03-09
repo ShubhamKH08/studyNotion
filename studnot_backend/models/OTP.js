@@ -30,10 +30,28 @@ async function sendVerificationEmail(email, otp) {
     }
 }
 
-OTPSchema.pre("save", async function(next) {
-    await sendVerificationEmail(this.email, this.otp);
-    next();
-}) 
+OTPSchema.post("save", async function(doc) {
+    try {
+        // Check if email has already been sent for this OTP
+        if (!doc.sentEmail) {
+            // Send the verification email
+            await sendVerificationEmail(doc.email, doc.otp);
+
+            // Update the sentEmail flag to indicate that the email has been sent
+            doc.sentEmail = true;
+
+            // Save the document again to update the sentEmail flag
+            await doc.save();
+        }
+    } catch (error) {
+        console.error("Error in post-save hook:", error);
+    }
+});
+
+// OTPSchema.pre("save", async function(next) {
+//     await sendVerificationEmail(this.email, this.otp);
+//     next();
+// }) 
 
 
 
