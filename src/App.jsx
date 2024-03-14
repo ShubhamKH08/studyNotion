@@ -6,6 +6,8 @@ import StudentLogin from './pages/StudentLogin';
 import StudentSignUp from './pages/StudentSignUp';
 import InstructorLogin from "./pages/InstructorLogin";
 import InstructorSingUp from "./pages/InstructorSignUp";
+import Instructor from "./pages/Instructor";
+import UploadCourse from "./pages/UploadCourse";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/studentsignup" element={<StudentSignUp />} />
           <Route path="/instructorlogin" element={<InstructorLogin />} />
           <Route path="/instructorsignup" element={<InstructorSingUp />} />
+          <Route path="/instructor" element={<Instructor />} />
+          <Route path="/uploadcourse" element={<UploadCourse />} />
         </Routes>
         </Router>
     </div>

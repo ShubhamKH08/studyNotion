@@ -1,0 +1,33 @@
+[
+    {
+      "id": 1,
+      "image": "https://templates.simplified.co/thumb/bedfe920-0de3-42d4-8683-ace376df4f86.jpg",
+      "title": "Basics of Python",
+      "description": "Learn the fundamentals of Python programming language.",
+      "created": "January 1, 2024",
+      "duration": "20h 10m",
+      "price": "520",
+      "published": true
+    },
+    {
+      "id": 2,
+      "image": "https://templates.simplified.co/thumb/ead84021-cc2c-4bcf-ad6d-d9c5b0a438fb.jpg",
+      "title": "Basics of Python",
+      "description": "Learn the fundamentals of Python programming language.",
+      "created": "February 15, 2024",
+      "duration": "18h 30m",
+      "price": "1200",
+      "published": false
+    },
+    {
+      "id": 3,
+      "image": "https://templates.simplified.co/usetldr/1022255/thumb/5a108056-a070-44ee-a123-1afd489077e0.jpg",
+      "title": "Basics of Python",
+      "description": "Learn the fundamentals of Python programming language.",
+      "created": "March 10, 2024",
+      "duration": "5h 52m",
+      "price": "1800",
+      "published": true
+    }
+  ]
+  
