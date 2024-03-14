@@ -175,7 +175,7 @@ export default function StudentSignUp() {
                         onChange={(e) =>
                           handleChange({
                             target: {
-                              name: "phoneNumber",
+                              name: "contactNumber",
                               value: e.target.value,
                             },
                           })
