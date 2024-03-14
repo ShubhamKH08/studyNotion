@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import InstructorSignUpImg from "../assets/InstructorSignUpImg.png";
@@ -7,6 +7,7 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { IoIosInformationCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
+import axios from "axios"
 
 export default function InstructorSignUp() {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ export default function InstructorSignUp() {
   };
 
   const {
-    register,
+    
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -37,10 +38,16 @@ export default function InstructorSignUp() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const onSubmit = (data) => {
-    // Handle form submission logic here
-    console.log(data);
+  const onSubmit = async () => {
+    try{
+      const response = await axios.post("http://localhost:4000/api/v1/auth/signup",formData)
+      console.log('Successfully registered: ', response)
+      navigate('/instructorlogin')
+    }catch(e){
+      console.log('Error:',e)
+    }
   };
+
 
   const navigate = useNavigate();
 

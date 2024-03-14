@@ -39,9 +39,12 @@ function Navbar() {
           </span>
         </div>
       </div>
-      <div className="space-x-4 text-white flex gap-4 ">
+      <div className="space-x-4 text-white flex gap-4 z-10 ">
         {menuItems.map((menuItem, index) => (
-          <div key={index} className="relative group hover:text-yellow-600 text-topbarText">
+          <div
+            key={index}
+            className="relative group hover:text-yellow-600 text-topbarText"
+          >
             {menuItem.subMenu ? (
               <div>
                 <span className="group hover:text-yellow-600 text-topbarText cursor-pointer flex items-center gap-1 lg:text-xl font-thin ">
@@ -91,9 +94,12 @@ function Navbar() {
           {ifSignedIn ? (
             <CgProfile className="w-8 h-8 text-gray-100 bg-transparent" />
           ) : (
-           <Link to="/studentlogin"> <button className="p-1 rounded-md font-thin border-boxBorder border ">
-              Sign In
-            </button></Link>
+            <Link to="/studentlogin">
+              {" "}
+              <button className="p-1 rounded-md font-thin border-boxBorder border ">
+                Sign In
+              </button>
+            </Link>
           )}
         </div>
       </div>

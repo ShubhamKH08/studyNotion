@@ -1,11 +1,12 @@
 
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import InstructorLoginImg from "../assets/InstructorLoginImg.png";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
+import axios  from "axios";
 
 function InstructorLogin() {
   const [formData, setFormData] = useState({
@@ -30,8 +31,19 @@ function InstructorLogin() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  // };
+  const onSubmit = async() => {
+    try{
+      console.log('data:',formData)
+    const response  = await axios.post("http://localhost:4000/api/v1/auth/login",formData);
+      console.log(response);
+      navigate('/')
+  }
+    catch(err){
+    console.log(err);
+    }
   };
 
   const navigate = useNavigate();

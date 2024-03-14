@@ -1,0 +1,43 @@
+
+
+
+.table-container {
+    margin: 25px;
+    overflow: hidden; /* Ensure rounded corners are visible */
+    border-radius: 10px;
+    border: 1px solid rgb(44 51 63);
+}
+
+.content-table {
+    border-collapse: collapse;
+    width: 100%;
+    
+}
+
+.content-table thead tr{
+
+    background-color: rgb(44 51 63);
+
+    border-collapse: collapse;
+    margin: 25px;
+    color: white;
+    text-align: left;
+    
+}
+
+.content-table th,
+.content-table td{
+
+    padding: 20px;
+    color: white;
+    
+}
+
+.content-table tbody tr{
+
+    border-bottom: 1px solid rgb(44 51 63); 
+}
+
+
+
+

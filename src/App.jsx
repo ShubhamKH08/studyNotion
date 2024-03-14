@@ -1,5 +1,6 @@
+
 import { Route, Routes, BrowserRouter as Router} from "react-router-dom";
-import './App.css'
+// import './App.css'
 import Navbar from "./components/Navbar";
 import Home from './pages/Home'
 import StudentLogin from './pages/StudentLogin';
@@ -8,6 +9,7 @@ import InstructorLogin from "./pages/InstructorLogin";
 import InstructorSingUp from "./pages/InstructorSignUp";
 import Instructor from "./pages/Instructor";
 import UploadCourse from "./pages/UploadCourse";
+import EnrolledCourses from "./components/Student/EnrolledCourses";
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
           <Route path="/instructorsignup" element={<InstructorSingUp />} />
           <Route path="/instructor" element={<Instructor />} />
           <Route path="/uploadcourse" element={<UploadCourse />} />
+          <Route path="/enrolled-course" element={<EnrolledCourses />} />
         </Routes>
         </Router>
     </div>
@@ -30,5 +33,4 @@ function App() {
 }
 
 export default App;
-
 
