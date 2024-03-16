@@ -4,11 +4,24 @@ import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
+// import { CgProfile } from "react-icons/cg";
+import { motion } from "framer-motion"
+
+
+const variants = {
+  open: { opacity: 1, x: 0 },
+  closed: { opacity: 0, x: "-100%" },
+}
 
 function Navbar() {
+  
   const [searchBar, setSearchBar] = useState(false);
   const [ifSignedIn, setIfSignedIn] = useState(false);
+  const [profileClick, setProfileClick] = useState(false);
+
+ const handleLogOut = ()=>{
+  localStorage.removeItem('token');
+ }
 
   const handleSearchBarToggle = () => {
     setSearchBar(!searchBar);
@@ -92,7 +105,15 @@ function Navbar() {
         </div>
         <div className=" text-gray-300 cursor-pointer">
           {ifSignedIn ? (
-            <CgProfile className="w-8 h-8 text-gray-100 bg-transparent" />
+        <div>
+            {/* // <img src={`https://ui-avatars.com/api/?name=${firstName}+${LastName}`} alt="Avatar" className="avatar"/> */}
+            <img src={`https://ui-avatars.com/api/?name=Shubham+Hagawane`} alt="Avatar" className="w-10 h-10 rounded-full" onClick={()=>setProfileClick(profileClick => !profileClick)}/>
+           
+           <motion.div  transition={{ ease: "easeOut", duration: 20 }}   className={`text-neutral-800 h-40 w-40 bg-white rounded-lg absolute right-0 flex flex-col justify-center  items-center gap-2 ${profileClick ?`hidden` : `duration-200  block`} `}>
+
+            <Link to="/studentlogin" onClick={handleLogOut}><span>Log out</span></Link>
+           </motion.div>
+            </div>
           ) : (
             <Link to="/studentlogin">
               {" "}

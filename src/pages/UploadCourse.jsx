@@ -1,5 +1,3 @@
-
-import React from 'react'
 import { useState } from 'react';
 import MultiStep from 'react-multistep'
 import CourseInfoForm from '../components/CourseInfoForm';

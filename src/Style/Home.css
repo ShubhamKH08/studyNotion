@@ -68,3 +68,18 @@
 .kp {
   filter: drop-shadow(10px 10px 0px #ffd60a);
 }
+
+@keyframes shadow-glow {
+  0% {
+    box-shadow: 0px 0px 40px 2px rgba(166, 252, 255, 0.56);
+  }
+}
+
+@keyframes shadow-less-more {
+  0%, 100% {
+    box-shadow: 0px 0px 10px 2px rgba(166, 234, 255, 0.56);
+  }
+  50% {
+    box-shadow: 0px 0px 20px 2px rgba(166, 252, 255, .80);
+  }
+}

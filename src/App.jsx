@@ -10,15 +10,20 @@ import InstructorSingUp from "./pages/InstructorSignUp";
 import Instructor from "./pages/Instructor";
 import UploadCourse from "./pages/UploadCourse";
 import EnrolledCourses from "./components/Student/EnrolledCourses";
+import Upload from "./components/Video/Upload";
+import Profile from "./pages/Profile/Profile";
+import OtpScreen from "./components/Auth/OtpScreen";
+// import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div>
+    <div className=" h-screen overflow-y-auto overflow-x-hidden">
       <Router>
       <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/otp" element={<OtpScreen />} />
           <Route path="/studentlogin" element={<StudentLogin />} />
           <Route path="/studentsignup" element={<StudentSignUp />} />
           <Route path="/instructorlogin" element={<InstructorLogin />} />
@@ -26,8 +31,12 @@ function App() {
           <Route path="/instructor" element={<Instructor />} />
           <Route path="/uploadcourse" element={<UploadCourse />} />
           <Route path="/enrolled-course" element={<EnrolledCourses />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         </Router>
+      {/* <Footer/> */}
+
     </div>
   );
 }

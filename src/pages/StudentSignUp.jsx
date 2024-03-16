@@ -39,28 +39,32 @@ export default function StudentSignUp() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleVerifyEmail = async ()=>{
-    try{
-      const response = await axios.post("http://localhost:4000/api/v1/auth/sendotp",{email:formData.email})
-      console.log('Email verified: ', response)
-    }catch(e){
-      console.log('Error:',e)
-    }
-  }
+  // const handleVerifyEmail = async ()=>{
+  //   try{
+  //     const response = await axios.post("http://localhost:4000/api/v1/auth/sendotp",{email:formData.email})
+  //     console.log('Email verified: ', response)
+  //   }catch(e){
+  //     console.log('Error:',e)
+  //   }
+  // }
 
   const onSubmit = async () => {
     try{
-      const response = await axios.post("http://localhost:4000/api/v1/auth/signup",formData)
-      console.log('Successfully registered: ', response)
-      navigate('/studentlogin')
+      // const response = await axios.post("http://localhost:4000/api/v1/auth/signup",formData)
+      // console.log('Successfully registered: ', response)
+
+      const response = await axios.post("http://localhost:4000/api/v1/auth/sendotp",{email:formData.email})
+      console.log('Email verified: ', response)
+      // navigate('/studentlogin')
+      navigate('/otp',{state:{ formData }})
     }catch(e){
       console.log('Error:',e)
     }
   };
 
 
-  const handleStudentLogin = () => {
-    navigate("/instuctorsignup");
+  const handleInstructorSignUp = () => {
+    navigate("/instructorsignup");
   };
 
   const [showNote, setShowNote] = useState(false);
@@ -90,7 +94,7 @@ export default function StudentSignUp() {
 
                 <div className="flex justify-center items-center mt-8">
                   <button
-                    onClick={handleStudentLogin}
+                    onClick={handleInstructorSignUp}
                     className="bg-gray-900 border-1 border-yellow-100 rounded-3xl px-8 py-2 hover:opacity-90"
                   >
                     Go to Instructor SignUp
@@ -138,10 +142,10 @@ export default function StudentSignUp() {
                     name="email"
                     required={true}
                   />
-                  <Button
+                  {/* <Button
                     text="Verify Email"
                      onClick={handleVerifyEmail}
-                   ></Button>
+                   ></Button> */}
 
                   <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
                     <div className="w-full">
@@ -232,7 +236,7 @@ export default function StudentSignUp() {
                       />
                     </div>
                     <div className="w-full">
-                      <InputField
+                      {/* <InputField
                         label="OTP"
                         type="text"
                         placeholder=". . . . . ."
@@ -242,7 +246,7 @@ export default function StudentSignUp() {
                         showError={!!errors.otp}
                         name="otp"
                         required={true}
-                      />
+                      /> */}
                     </div>
                   </div>
 

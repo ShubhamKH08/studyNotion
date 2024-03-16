@@ -1,10 +1,15 @@
 import "../Style/Home.css";
 import BannerVideo from "../assets/video/Home_page_banner.mp4";
 import { FaArrowRightLong } from "react-icons/fa6";
-
+import { FaArrowRight } from "react-icons/fa";
+import  Form  from "./../components/Video/form";
+import Gallery from "../components/Video/gallery";
+import Footer from "../components/Footer";
+// import Upload from "../components/Video/Upload";
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-auto w-screen inset-0 m-0 ">
+    <div className="w-screen">
+    <div className="min-h-screen w-screen inset-0 m-0 ">
       <div>
         <div className="box mx-auto">
           <div className="">
@@ -13,6 +18,13 @@ export default function Home() {
           <FaArrowRightLong className="hover:tr" />
             </button>
           </div>
+
+
+        {/* <Upload/> */}
+        {/* <Form/> */}
+
+
+
           <div className="box1b mt-38 text-white box1b mx-auto w-[913px] h-[120 px] gap-16">
             <div className="box1ba w-[913px] h-[44px] text-[#FFFFFF] font-display font-medium text-4xl leading-[44px] tracking-tighter text-center">
               Empower Your Future with{" "}
@@ -39,7 +51,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mx-auto my-20 w-full">
-          <video  className="mx-auto w-full" autoPlay  loop>
+          <video  className="" style={{ animation: 'shadow-less-more 2s infinite' }} autoPlay muted loop>
             <source src={BannerVideo} type="video/mp4"/>
           </video>
         </div>
@@ -62,9 +74,9 @@ export default function Home() {
               </div>
               <div className="flex box2c w-[338px] h-[100px] p-[52px, 0, 0, 0] gap-5">
                 <button className="text-center w-[179px] h-[48px] p-[12px 24px] rounded-md font-bold shadow-[2px 2px 0px 0px rgba(255, 255, 255, 0.18)] bg-[#FFD60A] text-black hover:shadow-none hover:scale-95 transition-all duration-200">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center gap-2">
                     <span>Try it Yourself</span>
-                    <i className="fi-rr-arrow-small-right"></i>
+                    <FaArrowRight className="" />
                   </div>
                 </button>
                 <button className="text-center w-[179px] h-[48px] p-[12px 24px] rounded-md font-bold shadow-[2px 2px 0px 0px rgba(255, 255, 255, 0.18)] bg-[#161D29] text-white">
@@ -74,11 +86,13 @@ export default function Home() {
             </div>
             <div className="box3 w-[534px] h-[342px] p-32 gap-2 bg-white"></div>
           </div>
-          <div className="box4 h-[550px] top-[1515px] p-[90px 120px 90px 120px] gap-98p">
+
+          <divs className="box4  p-[90px 120px 90px 120px] gap-98p">
             <div className="flex">
               <div className="box4a w-[534px] h-[342px]  gap-2 bg-slate-500 p-8">
                 <div className="box4aa bg-white w-[470px] h-[278px] bg-gradient-to-b from-[rgba(14, 26, 45, 0.24)] via-[rgba(17, 30, 50, 0.38)] to-transparent border border-solid border-[rgba(255, 255, 255, 0.22)] border-[37.38%]"></div>
               </div>
+              
               <div className="box4b w-[486px] h-[260px] gap-12">
                 <div className="w-[486px] h-[88px] font-display font-semibold text-4xl leading-[44px] tracking-tighter text-left text-[#F1F2FF]">
                   Start{" "}
@@ -98,7 +112,7 @@ export default function Home() {
                   <div className="flex">
                     <div></div>
                     <button className="inline-flex items-center justify-center w-[201px] h-[48px] p-[12px 24px] rounded-[8px] gap-8 bg-[#FFD60A] shadow-inset-primary-default mt-12">
-                      <span className="mr-2.5">Continue Lesson</span>
+                      <span className="mr-2.5 text-black">Continue Lesson</span>
                       <span className="fi-rr-arrow-small-right"></span>
                     </button>
                     <button className="inline-flex items-center justify-center w-[135px] h-[48px] p-[12px 24px] rounded-[8px] gap-8 bg-[#161D29] shadow-inset-secondary-default text-white ml-12 mt-12">
@@ -108,8 +122,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="box5a mx-auto w-[1200px] h-[76px] gap-8">
+          </divs>
+          <div className="box5a mx-auto w-[1200px]  gap-8">
             <div className="w-[1200px] h-[44px] text-[#FFFFFF] font-display font-medium text-4xl leading-[44px] tracking-tighter text-center">
               Unlock the{" "}
               <span className=" bg-gradient-to-br from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB] bg-clip-text text-transparent">
@@ -183,9 +197,13 @@ export default function Home() {
               </div>
             </div>
             <div className="box5c w-[1200px] h-[300px] bg-[#F9F9F9]"></div>
+            
           </div>
+      <Footer className="mt-2"/>
         </div>
       </div>
     </div>
+      </div>
+    
   );
 }

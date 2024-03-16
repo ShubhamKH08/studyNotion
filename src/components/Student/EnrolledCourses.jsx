@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import image01 from "../assets/image01.jpeg";
+import image01 from "../../assets/course_template.jpeg";
 import ProgressBar from "@ramonak/react-progress-bar";
 import "../../Style/EnrolledCourses.css";
 

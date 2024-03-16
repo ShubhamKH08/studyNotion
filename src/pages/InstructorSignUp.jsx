@@ -16,7 +16,7 @@ export default function InstructorSignUp() {
     email: "",
     password: "",
     confirmPassword: "",
-    accountType: "",
+    accountType: "Instructor",
     contactNumber: "",
     otp: "",
   });
@@ -38,11 +38,26 @@ export default function InstructorSignUp() {
     setFormData({ ...formData, [name]: value });
   };
 
+  // const onSubmit = async () => {
+  //   try{
+  //     const response = await axios.post("http://localhost:4000/api/v1/auth/signup",formData)
+  //     console.log('Successfully registered: ', response)
+  //     navigate('/instructorlogin')
+  //   }catch(e){
+  //     console.log('Error:',e)
+  //   }
+  // };
+
+  
   const onSubmit = async () => {
     try{
-      const response = await axios.post("http://localhost:4000/api/v1/auth/signup",formData)
-      console.log('Successfully registered: ', response)
-      navigate('/instructorlogin')
+      // const response = await axios.post("http://localhost:4000/api/v1/auth/signup",formData)
+      // console.log('Successfully registered: ', response)
+
+      const response = await axios.post("http://localhost:4000/api/v1/auth/sendotp",{email:formData.email})
+      console.log('Email verified: ', response)
+      // navigate('/studentlogin')
+      navigate('/otp',{state:{ formData }})
     }catch(e){
       console.log('Error:',e)
     }
@@ -220,7 +235,7 @@ export default function InstructorSignUp() {
                       />
                     </div>
                     <div className="w-full">
-                      <InputField
+                      {/* <InputField
                         label="OTP"
                         type="text"
                         placeholder="▢ ▢ ▢ ▢ ▢ ▢"
@@ -230,7 +245,7 @@ export default function InstructorSignUp() {
                         showError={!!errors.otp}
                         name="otp"
                         required={true}
-                      />
+                      /> */}
                     </div>
                   </div>
 
