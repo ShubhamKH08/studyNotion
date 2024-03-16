@@ -1,13 +1,28 @@
 // import { PrismaClient } from '@prisma/client';
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
-const globalObj = typeof window !== 'undefined' ? window : global;
+// const prisma = new PrismaClient();
+// const globalObj = typeof window !== 'undefined' ? window : global;
 
-if (!globalObj.client) {
-  globalObj.client = new PrismaClient();
+// if (!globalObj.client) {
+//   globalObj.client = new PrismaClient();
+// }
+
+// const client = globalObj.client;
+
+// export default client;
+import { PrismaClient } from "@prisma/client";
+
+
+let prisma;
+
+if (process.env.NODE_ENV === 'production') {
+    prisma = new PrismaClient()
+} else {
+    if (!global.cachedPrisma) {
+        global.cachedPrisma = new PrismaClient()
+    }
+    prisma = global.cachedPrisma
 }
 
-const client = globalObj.client;
-
-export default client;
+export const db = prisma;

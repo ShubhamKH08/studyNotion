@@ -1,8 +1,3 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
-
-// Now you can use prisma to interact with your database
 
 generator client {
   provider = "prisma-client-js"
