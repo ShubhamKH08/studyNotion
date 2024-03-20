@@ -11,7 +11,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "postinstall": "prisma generate",
-    "vercel-build":"prisma generate && next build"
+    "vercel-build": "prisma generate && vite build"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
