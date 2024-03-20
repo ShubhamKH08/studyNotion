@@ -1,3 +1,4 @@
+
 import {useState} from 'react'
 import {useNavigate, useLocation} from "react-router-dom";
 import OtpInput from 'react-otp-input';
@@ -5,6 +6,8 @@ import "../../Style/OtpScreen.css"
 import axios from 'axios';
 import Button from '../Button';
 import { FaArrowLeftLong } from "react-icons/fa6";
+import {Link} from "react-router-dom"
+
 
 export default function OtpScreen() {
     const [otp, setOtp] = useState('');
@@ -18,6 +21,7 @@ export default function OtpScreen() {
         const formData = location.state.formData;
         formData.otp = otp;
         console.log("\nformData: ", formData);
+        localStorage.setItem("token:","sihybddhybdib.f.ffkfkjunfnf")
         const response = await axios.post("http://localhost:4000/api/v1/auth/signup",formData)
         console.log('Successfully registered: ', response)
         navigate("/home")
@@ -58,11 +62,15 @@ export default function OtpScreen() {
 
     <div className="flex justify-between" style={{ color: 'aliceblue' }}>
       <div  className="">
-        <div className="arrow flex items-center hover:scale-105 cursor-pointer">
+        {/* <div className="arrow flex items-center hover:scale-105 cursor-pointer"> */}
+        {/* <Link to="/login" className="arrow flex items-center hover:scale-105 cursor-pointer"> */}
+       <Link to="/login">
         <FaArrowLeftLong />
           <div className="bt2 ml-2 mt-1">
             Back to login</div>
-        </div>
+        
+        </Link>
+        {/* </Link> */}
       </div>
       <div className=" flex items-center">
         <div className="resend-button ml-3 text-blue-500 hover:scale-105 cursor-pointer">Resend it</div>

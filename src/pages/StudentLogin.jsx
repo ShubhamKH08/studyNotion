@@ -1,5 +1,3 @@
-
-
 import  { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -33,9 +31,13 @@ function StudentLogin() {
       console.log('data:',formData)
     const response  = await axios.post("http://localhost:4000/api/v1/auth/login",formData);
       console.log(response);
+
+      console.log("response:",response, "token:",response.data.token);
+      localStorage.setItem("token:", response.data.token);
       navigate('/')
   }
     catch(err){
+      alert('Invalid email/ password wrong');
     console.log(err);
     }
   };
@@ -99,12 +101,14 @@ function StudentLogin() {
                     showIcon={true}
                     required={true}
                   />
-                  <a
-                    href="#"
+                  
+                  <Link
+                    to="/reset"
                     className="float-right custom-blue-text-color lg:text-xs mb-8 hover:underline hover:underline-offset-4"
                   >
                     Forgot password?
-                  </a>
+                  
+                  </Link>
                   <br />
                   <Button type="submit" text="Login" />
                   <Link

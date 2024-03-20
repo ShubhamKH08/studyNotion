@@ -7,79 +7,6 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const Profile = require("../models/Profile");
 
-// Send OTP For Email Verification
-//1)bad approch
-// exports.sendotp = async (req, res) => {
-
-//     try{
-//      //fetch email from request body
-//      const {email} = req.body;
-
-//      //check if the user already exit
-//      const checkUserPresent = await User.findOne({email});
-
-//      //if user user already exit, then return a response
-//      if(checkUserPresent) {
-//          return res.status(401).json({
-//              success:false,
-//              message:"user already registered",
-
-//          })
-//      }
-
-//      //genereate otp
-//      //line 28 to 48 code bad pratice
-//      var otp = otpGenerator.generate(6, {
-//          upperCaseAlphabets:false,
-//          lowerCaseAlphabets:false,
-//          specialChars:false,
-//      });
-//      console.log("OTP generated", otp);
-
-//      //checkunique otp or not
-//      const result = await OTP.findOne({otp: otp});
-//      console.log("Result is Generate OTP Func");
-//      console.log("OTP", otp);
-//      console.log("Result",result);
-//     //result is exit means OTP is already exit then create new otp using while
-//     //jabtk otp  match hoty to prynt
-//      while(result) {
-//          otp = otpGenerator(6, {
-//              upperCaseAlphabets:false,
-//              lowerCaseAlphabets:false,
-//              specialChars:false,
-//          });
-//          //check entry in db (loop) so its bad pratice (unqiue otp  -->end loop)
-//          result = await OTP.findOne({otp: otp});
-//      }
-
-//       //unquie otp so create entry for otp in db
-
-//      //payload for entry in db
-//       const otpPayload = {email, otp};
-
-//       //create an entry for  OTP
-//       const otpBody = await OTP.create(otpPayload);
-//       console.log(otpBody);
-
-//       //return response
-//       res.stauts(200).json({
-//          success:true,
-//          message:"OTP Sent Successfully",
-//         otp,
-//       })
-
-//   }  catch(error) {
-//      console.log();
-//      return res.status(500).json({
-//          success:false,
-//          message:error.message,
-//      })
-
-//     }
-
-//  }
-
 //----- New approch for sendotp
 exports.sendotp = async (req, res) => {
   try {
@@ -116,8 +43,8 @@ exports.sendotp = async (req, res) => {
       });
     }
     
-    // const otpPayload = { email, otp };
-    const otpBody = await OTP.create({ email, otp });
+
+    const otpBody = await OTP.create({ email, otp, });
     console.log("OTP Body", otpBody);
     res.status(200).json({
       success: true,
@@ -134,6 +61,7 @@ exports.sendotp = async (req, res) => {
 exports.signup = async (req, res) => {
   try {
     // Destructure fields from the request body
+    // Destructure fields from the request body~
     const {
       firstName,
       lastName,

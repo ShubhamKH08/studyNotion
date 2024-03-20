@@ -1,3 +1,4 @@
+
 import  { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +8,7 @@ import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import axios  from "axios";
 
-function InstructorLogin() {
+function  InstructorLogin() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -40,6 +41,8 @@ function InstructorLogin() {
       navigate('/')
   }
     catch(err){
+      alert('Invalid email/ password wrong');
+
     console.log(err);
     }
   };
@@ -103,12 +106,14 @@ function InstructorLogin() {
                     showIcon={true}
                     required={true}
                   />
-                  <a
-                    href="#"
+                 
+                  <Link
+                  to="/reset"
                     className="float-right custom-blue-text-color lg:text-xs mb-8 hover:underline hover:underline-offset-4"
                   >
                     Forgot password?
-                  </a>
+                 
+                  </Link>
                   <br />
                   <Button type="submit" text="Login" />
                   <Link

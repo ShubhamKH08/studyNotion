@@ -1,3 +1,4 @@
+
 import Logo from "../assets/Logo.png";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -8,10 +9,8 @@ import { IoSearch } from "react-icons/io5";
 import { motion } from "framer-motion"
 
 
-const variants = {
-  open: { opacity: 1, x: 0 },
-  closed: { opacity: 0, x: "-100%" },
-}
+
+import { IoIosLogOut } from "react-icons/io";
 
 function Navbar() {
   
@@ -20,20 +19,27 @@ function Navbar() {
   const [profileClick, setProfileClick] = useState(false);
 
  const handleLogOut = ()=>{
-  localStorage.removeItem('token');
- }
+  // localStorage.removeItem('token');
+  localStorage.removeItem('token:');
+ }  
 
   const handleSearchBarToggle = () => {
     setSearchBar(!searchBar);
   };
+  
 
+ 
   useEffect(() => {
-    var token = localStorage.getItem("token");
-    if (token) {
+    var token1 = localStorage.getItem("token");
+    var token2 = localStorage.getItem("token:");
+    if (token1 || token2) {
       setIfSignedIn(true);
+    } else {
+      setIfSignedIn(false);
     }
-  }, []); // <--- Added empty dependency array to ensure useEffect runs only once
+  }, [localStorage.getItem("token:")]); // Include localStorage.getItem("token") in the dependency array
 
+  
   // Define array for menu items and sub-menu items
   const menuItems = [
     { title: "Home", link: "/" },
@@ -104,26 +110,30 @@ function Navbar() {
           <IoCartOutline className="w-6 h-6 bg-slate-200 bg-transparent" />
         </div>
         <div className=" text-gray-300 cursor-pointer">
+         
+         
           {ifSignedIn ? (
         <div>
             {/* // <img src={`https://ui-avatars.com/api/?name=${firstName}+${LastName}`} alt="Avatar" className="avatar"/> */}
             <img src={`https://ui-avatars.com/api/?name=Shubham+Hagawane`} alt="Avatar" className="w-10 h-10 rounded-full" onClick={()=>setProfileClick(profileClick => !profileClick)}/>
            
-           <motion.div  transition={{ ease: "easeOut", duration: 20 }}   className={`text-neutral-800 h-40 w-40 bg-white rounded-lg absolute right-0 flex flex-col justify-center  items-center gap-2 ${profileClick ?`hidden` : `duration-200  block`} `}>
-
-            <Link to="/studentlogin" onClick={handleLogOut}><span>Log out</span></Link>
-           </motion.div>
+        
+            
             </div>
           ) : (
-            <Link to="/studentlogin">
+            // <Link to="/studentlogin">
+             <Link onClick={handleLogOut} to="/studentlogin">
               {" "}
               <button className="p-1 rounded-md font-thin border-boxBorder border ">
                 Sign In
               </button>
             </Link>
           )}
-        </div>
+          </div>
       </div>
+      <motion.div  transition={{ ease: "easeOut", duration: 20 }}   className={`absolute translate-y-10 -translate-x-12 text-sm   text-neutral-800 cursor-pointer  w-30 p-2 bg-white rounded-lg right-0 flex flex-col justify-center  items-center gap-2 ${profileClick ?`duration-200  block` :`hidden` } `}>
+            <Link to="/studentlogin" onClick={handleLogOut} className="flex justify-between items-center gap-2"><IoIosLogOut className="h- w-4" /><span>Log out</span></Link>
+           </motion.div>
     </div>
   );
 }

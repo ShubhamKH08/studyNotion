@@ -1,3 +1,4 @@
+
 import "../Style/Home.css";
 import BannerVideo from "../assets/video/Home_page_banner.mp4";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -21,7 +22,7 @@ export default function Home() {
 
 
         {/* <Upload/> */}
-        {/* <Form/> */}
+        <Form/>
 
 
 
@@ -87,7 +88,8 @@ export default function Home() {
             <div className="box3 w-[534px] h-[342px] p-32 gap-2 bg-white"></div>
           </div>
 
-          <divs className="box4  p-[90px 120px 90px 120px] gap-98p">
+          {/* <divs className="box4  p-[90px 120px 90px 120px] gap-98p"> */}
+          <div className="box4  p-[90px 120px 90px 120px] gap-98p">
             <div className="flex">
               <div className="box4a w-[534px] h-[342px]  gap-2 bg-slate-500 p-8">
                 <div className="box4aa bg-white w-[470px] h-[278px] bg-gradient-to-b from-[rgba(14, 26, 45, 0.24)] via-[rgba(17, 30, 50, 0.38)] to-transparent border border-solid border-[rgba(255, 255, 255, 0.22)] border-[37.38%]"></div>
@@ -122,7 +124,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </divs>
+          </div>
+          {/* </divs> */}
           <div className="box5a mx-auto w-[1200px]  gap-8">
             <div className="w-[1200px] h-[44px] text-[#FFFFFF] font-display font-medium text-4xl leading-[44px] tracking-tighter text-center">
               Unlock the{" "}
@@ -200,6 +203,10 @@ export default function Home() {
             
           </div>
       <Footer className="mt-2"/>
+
+      <Footer className=" "/>
+
+
         </div>
       </div>
     </div>

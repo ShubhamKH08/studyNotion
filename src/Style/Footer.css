@@ -1,0 +1,159 @@
+
+.footer-screen {
+    width: 1440px;
+    height: 728px;
+    top: 2011px;
+    padding: 52px 120px 52px 120px;
+    border: 1px solid transparent;
+    gap: 32px;
+    background: #161D29;
+    border-top: 1px solid #424854;
+  }
+  
+  .cn1 {
+    width: 83.33%;
+    max-width: 1200px;
+    height: 538px;
+    margin-top: 52px;
+    margin-bottom: 138px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 6.4px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .cl1, .cl2 {
+    width: calc((100% - 6.4px) / 2); /* Divide available width by 2, considering the gap */
+  }
+  
+  .cl1 {
+    color: antiquewhite;
+  }
+  
+  .cl2 {
+    color: antiquewhite;
+    margin-left: 12px; /* Set the margin between cl1 and cl2 */
+  }
+  
+  .lg {
+    display: flex;
+  }
+  
+  .lg1 {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    position: relative;
+    display: flex;
+    margin-right: 6.4px;
+  }
+  
+  .lg1::before {
+    content: 'S';
+    position: absolute;
+    width: 16px;
+    height: 20.8px;
+    margin-top: 6px;
+    margin-left: 10px;
+    color: #161D29;
+    font-weight: bold;
+    line-height: 20.8px;
+  }
+  
+  .lg2 {
+    display: flex;
+    margin-left: 5px;
+    color: #C5C7D4;
+    width: 121.11px;
+    top: 6.4px;
+    left: 38.4px;
+  }
+  
+  .c1 {
+    color: #AFB2BF;
+    margin-top: 12px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  
+  .c2 {
+    color: #AFB2BF;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .c3{
+    color: #AFB2BF;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-top: 36px;
+
+  }
+  
+  .cc1 {
+    color: #6E727F;
+    margin-top: 12px;
+  }
+
+  .fa {
+    height: 24px;
+    width: 24px;
+    gap: 12px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-right: 12px;
+  }
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+  
+  .fa-facebook {
+    
+    color:#6E727F;
+
+  }
+  
+  .fa-twitter {
+    color:#6E727F;
+    
+  }
+  
+  .fa-google {
+    color:#6E727F;
+    
+  }
+  
+  .fa-youtube {
+    color:#6E727F;
+  }
+  .cn2{
+    margin-top: 52px;
+    margin-left: 120px;
+    display: flex;
+    
+    justify-content:start
+
+  }
+  .cc2{
+    color: #838894;
+    padding-right: 16px;
+   
+    
+
+  }
+  

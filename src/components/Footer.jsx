@@ -1,12 +1,13 @@
+
 import "../Style/Footer.css"
 export default function Footer() {
   return (
-    <div className="footer-body">
+    <div className="footer-screen">
          <div className="cn1">
       <div className="cl1">
         <div className="lg">
           <div className="lg1"></div>
-          <div className="lg2">StudyNotation</div>
+          <div className="lg2 ">StudyNotation</div>
         </div>
         <div className="c1">Company</div>
         <div className="cc1">About</div>

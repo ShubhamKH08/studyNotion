@@ -48,13 +48,39 @@ export default function InstructorSignUp() {
   //   }
   // };
 
+  const validatePassword = () => {
+    const { password } = formData; // Corrected access to password field
+    const errors = [];
+    if (password.length < 8) {
+      errors.push("Password must be at least 8 characters long");
+    }
+    if (!/[A-Z]/.test(password)) {
+      errors.push("Password must contain at least one uppercase letter");
+    }
+    if (!/[a-z]/.test(password)) {
+      errors.push("Password must contain at least one lowercase letter");
+    }
+    if (!/[^a-zA-Z0-9]/.test(password)) {
+      errors.push("Password must contain at least one symbol");
+    }
+    return errors;
+  };
   
   const onSubmit = async () => {
+  
+
     try{
       // const response = await axios.post("http://localhost:4000/api/v1/auth/signup",formData)
       // console.log('Successfully registered: ', response)
+      const passwordErrors = validatePassword();
+      if (passwordErrors.length > 0) {
+        // If there are password validation errors, display alert messages
+        alert(passwordErrors.join("\n"));
+        return; // Exit the function without submitting if there are errors
+      }
 
       const response = await axios.post("http://localhost:4000/api/v1/auth/sendotp",{email:formData.email})
+    // const response = await axios.post("http://localhost:4000/api/v1/auth/sendotp",{email:formData.email})
       console.log('Email verified: ', response)
       // navigate('/studentlogin')
       navigate('/otp',{state:{ formData }})
@@ -178,14 +204,14 @@ export default function InstructorSignUp() {
                         onChange={(e) =>
                           handleChange({
                             target: {
-                              name: "phoneNumber",
+                              name: "contactNumber",
                               value: e.target.value,
                             },
                           })
                         }
                         errorMessage={errors.phoneNumber?.message}
                         showError={!!errors.phoneNumber}
-                        name="phoneNumber"
+                        name="contactNumber"
                       />
                     </div>
                   </div>

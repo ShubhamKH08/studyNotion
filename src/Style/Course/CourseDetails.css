@@ -1,0 +1,72 @@
+
+/* .block1 {
+    margin-left: 120px;
+  } */
+  .block2a {
+    margin-top: 32px;
+  }
+  .block2aa {
+    margin-top: 123px;
+  }
+  .block2 {
+    margin-left: 120px;
+  }
+  .img5 {
+    
+    background-image: url('../../assets/images/img7.png');
+    background-size: cover; /* This will make the background image cover the entire block */
+    background-repeat: no-repeat; /* This will ensure the background image doesn't repeat */
+    background-position: center; /* This will center the background image */
+    /* Optionally, you can specify other properties like width and height to define the size of the block */
+  }
+  
+  
+  .body {
+    background-color: #000814;
+  } /* Define the CSS for the 4-star rating system */
+  /* Define the CSS for the 4-star rating system */
+  .rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+  }
+  .rate:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+  }
+  .rate:not(:checked) > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+  }
+  .rate:not(:checked) > label:before {
+    content: "★ ";
+  }
+  .rate > input:checked ~ label {
+    color: #ffc700; /* Yellow color for selected stars */
+  }
+  .rate:not(:checked) > label:hover,
+  .rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+  }
+  .rate > input:checked + label:hover,
+  .rate > input:checked + label:hover ~ label,
+  .rate > input:checked ~ label:hover,
+  .rate > input:checked ~ label:hover ~ label,
+  .rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+  }
+  
+  /* Additional CSS to set the rating to 4 stars */
+  .rate > input:nth-of-type(1):checked ~ label:nth-of-type(-n + 4) {
+    color: #ffc700; /* Yellow color for the first four stars */
+  }
+  
+  .bl1 {
+    top: 1354px;
+  }
+  
