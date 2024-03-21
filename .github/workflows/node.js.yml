@@ -17,8 +17,8 @@ jobs:
       with:
         node-version: '14.x'
         cache: 'npm'
-    - run: npm ci --prefix studynotion
-    - run: npm test --prefix studynotion
+    - run: npm ci --prefix studyNotion
+    - run: npm test --prefix studyNotion
 
   backend-tests:
     runs-on: ubuntu-latest
