@@ -204,7 +204,7 @@ export default function Home() {
           </div>
       <Footer className="mt-2"/>
 
-      <Footer className=" "/>
+      {/* <Footer className=" "/> */}
 
 
         </div>

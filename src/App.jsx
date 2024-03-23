@@ -45,7 +45,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/course" element={<CourseDetails />} />
         </Routes>
-      <Footer/>
+      {/* <Footer/> */}
         </Router>
       {/* <Footer/> */}
         

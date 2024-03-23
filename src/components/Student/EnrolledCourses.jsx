@@ -2,6 +2,7 @@ import { useState } from 'react';
 import image01 from "../../assets/course_template.jpeg";
 import ProgressBar from "@ramonak/react-progress-bar";
 import "../../Style/EnrolledCourses.css";
+import Sidebar from '../Student/Sidebar';
 
 export const EnrolledCourses = () => {
   const [courses, setCourses] = useState([
@@ -22,7 +23,10 @@ export const EnrolledCourses = () => {
   };
 
   return (
-    <>
+    <div className='flex gap-0 max-w-screen overflow-hidden '>
+      <div className="w-[14%] h-screen bg-red-400">
+        <Sidebar/>
+      </div>
       <div className=" bg-richblack-900">
         <div className="flex flex-1 flex-col">
           <h1 className="mb-14 ml-16 mt-4 text-3xl font-medium text-richblack-5">
@@ -95,7 +99,7 @@ export const EnrolledCourses = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
