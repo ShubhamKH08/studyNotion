@@ -6,25 +6,18 @@ const Sidebar = () => {
 
   const sections = [
     {
-      title: 'Home',
+      title: '',
       options: [
-        { id: 'home-enrolled', name: 'Enrolled Courses', icon: <GiSpeedometer />, path: '/enrolled-courses' },
-        { id: 'home-purchase', name: 'Purchase History', icon: <GiSpeedometer />, path: '/purchase-history' },
-        { id: 'home-wishlist', name: 'Wishlist', icon: <GiSpeedometer />, path: '/wishlist' },
-        { id: 'home-reviews', name: 'Reviews', icon: <GiSpeedometer />, path: '/reviews' },
-        { id: 'home-dashboard', name: 'Dashboard', icon: <GiSpeedometer />, path: '/dashboard' }
+        { id: 'Profile', name: 'My Profile', icon: <GiSpeedometer />, path: '/profile' },
+        { id: 'Enrolled', name: 'Enrolled Courses', icon: <GiSpeedometer />, path: '/student-purchase-history' },
+        { id: 'home-wishlist', name: 'Wishlist', icon: <GiSpeedometer />, path: '/student-wishlist' },
+        { id: 'Purchase', name: 'Purchase History', icon: <GiSpeedometer />, path: '/studentreviews' },
+        { id: 'Courses', name: 'Courses', icon: <GiSpeedometer />, path: '/student-Courses' }
       ]
     },
+    
     {
-      title: 'Instructor',
-      options: [
-        { id: 'instructor-earning', name: 'Earning', icon: <GiSpeedometer />, path: '/earning' },
-        { id: 'instructor-withdrawals', name: 'Withdrawals', icon: <GiSpeedometer />, path: '/withdrawals' },
-        { id: 'instructor-courses', name: 'My Courses', icon: <GiSpeedometer />, path: '/my-courses' }
-      ]
-    },
-    {
-      title: 'No-Name',
+      title: '',
       options: [
         { id: 'no-name-setting', name: 'Setting', icon: <GiSpeedometer />, path: '/setting' },
         { id: 'no-name-logout', name: 'Log Out', icon: <GiSpeedometer />, path: '/logout' }
@@ -37,20 +30,20 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="bg-gray-800 h-screen  py-8 px-4 text-white">
+    <div className="bg-gray-800 h-screen  p-1  text-white">
       {sections.map((section, index) => (
         <div key={index}>
+          <hr className="my-2 border-t-2 border-gray-700" />
           <p className="text-xl font-bold">{section.title}</p>
-          <hr className="my-2 border-t-2 border-green-500" />
           <ul className="mt-2">
             {section.options.map((option, i) => (
-              <li key={i} className={`flex items-center mt-2 ${selectedOption === option.id ? 'bg-green-500' : ''}`}>
+              <li key={i} className={`group px-2  duration-75 bg-opacity-10 flex items-center w-full mt-2 hover:text-yellow-300  hover:bg-yellow-950 ${selectedOption === option.id ? 'bg-yellow-700' : ''}`}>
                 {option.icon}
                 <Link
                   to={option.path}
-                  className={`ml-2 ${selectedOption === option.id ? 'text-red-500' : 'text-white'}`}
+                  className={`ml-2 my-1 duration-75 group-hover:text-yellow-300 ${selectedOption === option.id ? 'text-yellow-400' : 'text-white'}`}
                   onClick={() => handleOptionClick(option)}
-                >
+                > 
                   {option.name}
                 </Link>
               </li>

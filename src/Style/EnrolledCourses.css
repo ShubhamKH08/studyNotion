@@ -2,7 +2,6 @@
 
 
 .table-container {
-    margin: 25px;
     overflow: hidden; /* Ensure rounded corners are visible */
     border-radius: 10px;
     border: 1px solid rgb(44 51 63);

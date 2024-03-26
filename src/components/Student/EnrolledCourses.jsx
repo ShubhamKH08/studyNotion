@@ -24,17 +24,18 @@ export const EnrolledCourses = () => {
 
   return (
     <div className='flex gap-0 max-w-screen overflow-hidden '>
-      <div className="w-[14%] h-screen bg-red-400">
-        <Sidebar/>
+      <div className="w-[14%] h-screen">
+        <Sidebar className="fixed"/>
       </div>
-      <div className=" bg-richblack-900">
+      <div className=" bg-richblack-900 w-full py-4 ">
+        <span className='ml-4 '>Home / Dashboard / Enrolled Courses</span>
         <div className="flex flex-1 flex-col">
-          <h1 className="mb-14 ml-16 mt-4 text-3xl font-medium text-richblack-5">
+          <span className=" mx-4 mt-2 text-3xl font-medium text-richblack-5">
             Enrolled Courses
-          </h1>
+          </span>
 
           
-          <div className="flex mb-4 ml-16 space-x-4">
+          <div className="flex  ml-4 space-x-6">
           <div className="flex bg-richblack-800 p-1 gap-x-1 my-6 rounded-full max-w-max" style={{ boxShadow: 'rgba(255, 255, 255, 0.18) 0px -1px 0px inset;' }}>
             <button
               className={`px-4 py-2 rounded-full ${currentView === "All" ? "bg-black text-white" : "bg-gray-200 text-gray-800"}`}
@@ -57,7 +58,7 @@ export const EnrolledCourses = () => {
             </div>
           </div>
 
-          <div className="table-container">
+          <div className="table-container mx-6">
             <table className='content-table'>
               <thead>
                 <tr>
