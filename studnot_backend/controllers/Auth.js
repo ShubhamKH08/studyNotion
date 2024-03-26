@@ -6,6 +6,9 @@ const mailSender = require("../utils/mailSender");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const Profile = require("../models/Profile");
+const crypto= require("crypto");
+const requestIp = require('request-ip');
+
 
 //----- New approch for sendotp
 exports.sendotp = async (req, res) => {
@@ -56,6 +59,13 @@ exports.sendotp = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
+
+function generateDeviceToken(){
+   return crypto.randomBytes(16).toString('hex');
+
+}
+
+
 
 // Signup Controller for Registering USers
 exports.signup = async (req, res) => {
@@ -162,45 +172,66 @@ exports.signup = async (req, res) => {
   }
 };
 
+
+
 //Login
+// Login Controller
+// Login Controller
 exports.login = async (req, res) => {
+  console.log("Login controller is called");
   try {
-    // console.log("reached the login")
-    //get data from req. body
     const { email, password } = req.body;
-    //validation data
+
     if (!email || !password) {
       return res.status(403).json({
         success: false,
-        // message: "While login all fields are required. please try agian",
-        message: "Body email: "+email+" password: "+password,
-      });
-    }
-    //user check exits or not
-    const user = await User.findOne({ email }).populate("additionalDetails");
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        message: "User is not registrered, please signup first",
+        message: "All fields are required. Please try again.",
       });
     }
 
-    //generate JWT, after password matching
+    // Fetch user including password field
+    const user = await User.findOne({ email }).select('+password').populate("additionalDetails");
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "User is not registered. Please sign up first.",
+      });
+    }
+
+    // Check if user has an active session
+    if (user.activeSession) {
+
+      console.log("the token is" , user.token);
+      return res.status(401).json({
+        success: false,
+        message: "User is already logged in on another device.",
+        activeDevices: user.deviceTokens,
+        activeDeviceIP: user.activeDeviceIP,
+        lastLogin: user.lastLogin
+      });
+    }
+
     if (await bcrypt.compare(password, user.password)) {
       const payload = {
         email: user.email,
         id: user._id,
         accountType: user.accountType,
       };
-      const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "2h",
-      });
-      user.token = token;
-      user.password = undefined;
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
 
-      //create cookie and send response
+      // Update user details for active session
+      user.token = token;
+      user.activeSession = true;
+      const deviceToken = generateDeviceToken();
+      user.deviceTokens.push(deviceToken);
+      const clientIp = requestIp.getClientIp(req);
+      user.activeDeviceIP = clientIp;
+      user.lastLogin = Date.now();
+
+      await user.save();
+
       const options = {
-        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
       };
       res.cookie("token", token, options).status(200).json({
@@ -211,18 +242,80 @@ exports.login = async (req, res) => {
       });
     } else {
       return res.status(401).json({
-        uccess: false,
+        success: false,
         message: "Password is incorrect",
       });
     }
   } catch (error) {
-    console.log(error);
+    console.error('Error while logging in:', error);
     return res.status(500).json({
       success: false,
-      message: "Login Failure, please try again",
+      message: "Internal Server Error",
     });
   }
 };
+
+exports.logout = async(req,res) => {
+      
+      try{
+
+        console.log("In the handler")
+
+          const userId = req.user.id;
+
+          const user = await User.findById(userId);
+
+          console.log(user);
+
+
+          if(!user){
+
+            return res.status(404).json({
+              success: false,
+              message: "User not found",
+            });
+
+          }
+
+          console.log("User verfied");
+
+          user.activeSession = false;
+          user.deviceTokens = []; // Clear device tokens
+          user.activeDeviceIP = null; // Clear active device IP
+          user.lastLogout = Date.now(); // Update last logout time
+          await user.save();
+          
+          console.log(user.activeSession);
+
+
+
+         const  token = req.user.token;
+         
+         res.clearCookie(token);
+         console.log("the token agter clearing is");
+
+
+         return res.status(200).json({
+             success:true,
+             mesaage: " User logged out successfully",
+         });
+
+
+
+           
+          
+      }
+
+      catch(error){
+
+         return res.status(500).json({
+             success:false,
+             message : "Unable to logged out  , Please try again"
+         })
+      }
+}
+  
+
 
 // Controller for Changing Password
 exports.changePassword = async (req, res) => {
@@ -287,3 +380,4 @@ exports.changePassword = async (req, res) => {
     });
   }
 };
+
