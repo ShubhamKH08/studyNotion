@@ -19,6 +19,8 @@ const userSchema = new mongoose.Schema({
     password: {
         type:String,
         required:true,
+        select : false,
+        
     },
     accountType: {
         type:String,
@@ -52,7 +54,34 @@ const userSchema = new mongoose.Schema({
             ref:"CourseProgress",
         }
     ],
+    // Array to store device tokens
+    deviceTokens : {
 
+        type : [String],
+        default : []
+
+    },
+    
+    // Field to store whether the user has an active session
+    activeSession: {
+        type: Boolean,
+        default: false
+    },
+
+    activeDeviceIP : {
+
+        type: String,
+        
+    } ,
+
+    lastLogin : {
+
+        type : Date,
+        
+    }
+    
+    
+        
 });
 
 module.exports = mongoose.model("User", userSchema);
