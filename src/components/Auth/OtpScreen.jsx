@@ -16,7 +16,6 @@ export default function OtpScreen() {
 
     const handleVerify =async () =>{
       try{
-
         console.log("otp is: ", otp);
         const formData = location.state.formData;
         formData.otp = otp;
