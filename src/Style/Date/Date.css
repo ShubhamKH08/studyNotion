@@ -1,0 +1,15 @@
+/* CSS */
+.date-icon {
+    position: relative;
+  }
+  
+  .date-icon::before {
+    content: url('calendar-icon.svg'); /* Replace 'calendar-icon.svg' with your icon's path */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px; /* Adjust icon size as needed */
+    height: 20px;
+  }
+  

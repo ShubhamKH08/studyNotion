@@ -43,7 +43,7 @@ const Sidebar = () => {
                 {option.icon}
                 <Link
                   to={option.path}
-                  className={`ml-2 my-1 duration-75 group-hover:text-yellow-300 ${selectedOption === option.id ? 'text-yellow-400' : 'text-white'}`}
+                  className={`ml-2 my-1 duration-75 group-hover:text-yellow-300 text-xl ${selectedOption === option.id ? 'text-yellow-400' : 'text-white'}`}
                   onClick={() => handleOptionClick(option)}
                 > 
                   {option.name}

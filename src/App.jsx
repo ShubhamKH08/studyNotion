@@ -21,6 +21,7 @@ import NewPassword from "./components/Auth/ChooseNewPassword";
 import Footer from "./components/Footer";
 import CourseDetails from "./pages/Course/Details/CourseDetails";
 import CourseBuilder from "./pages/Instructor/DashBoard/CourseBuilder";
+// import About from "./pages/About/AboutUs";
 
 function App() {
   return (
@@ -39,13 +40,14 @@ function App() {
           <Route path="/studentsignup" element={<StudentSignUp />} />
           <Route path="/instructorlogin" element={<InstructorLogin />} />
           <Route path="/instructorsignup" element={<InstructorSingUp />} />
-          <Route path="/instructor" element={<Instructor />} />
-          <Route path="/uploadcourse" element={<UploadCourse />} />
+          <Route path="/instructor-course" element={<Instructor />} />
+          <Route path="/uploadcourse" element={<UploadCourse />} />{/* courae Inform,ation page */}
           <Route path="/enrolled-course" element={<EnrolledCourses />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/course" element={<CourseDetails />} />
           <Route path="/course-builder" element={<CourseBuilder />} />
+          {/* <Route path="/about" element={<About />} /> */}
         </Routes>
       {/* <Footer/> */}
         </Router>

@@ -1,91 +1,56 @@
-import { useState } from 'react';
-import MultiStep from 'react-multistep'
-import CourseInfoForm from '../components/CourseInfoForm';
-import CourseBuilderForm from '../components/CourseBuilderForm';
-import CoursePublishForm from '../components/CoursePublishForm';
+
+import { Link } from 'react-router-dom';
+import { CourseProvider } from '../Context/courseContext';
+import MultiStepForm from '../components/MultiStepForm';
+import { FaChevronLeft } from "react-icons/fa";
+import Sidebar from "../components/Instructor/Sidebar";
+
 
 const UploadCourse = () => {
 
-    const [formDataStepOne, setFormDataStepOne] = useState({
-        coursetitle: '',
-        coursedesc: '',
-        price: '',
-        category: '',
-        tag: '',
-        thumbnail: '',
-        benefits: '',
-        req: ''
-      });
-
-    const steps = [
-        {title: 'stepone', component:  <CourseInfoForm formData={formDataStepOne} setFormData={setFormDataStepOne} />},
-        {title: 'steptwo', component: <CourseBuilderForm />},
-        {title: 'stepthree', component: <CoursePublishForm />},
-      ];
-
-    const prevbtn = {
-        title: "< Back",
-        style: {
-            padding: '1rem',
-            margin: '0.5rem',
-            borderRadius: '0.375rem',
-            backgroundColor: '#161d29', 
-            color: 'white', 
-            textAlign: 'center',
-            fontSize: '0.875rem', 
-            fontWeight: '500', 
-            transitionProperty: 'transform, opacity',
-            transitionDuration: '0.3s',
-        }
-    }
-    
-        const handleNextStep = () => {
-            console.log('Form data from step one:', formDataStepOne);
-          };
-
-    const nextbtn = {
-        title: "Next > ",
-        style: {
-            padding: '1rem',
-            margin: '0.5rem',
-            borderRadius: '0.375rem',
-            backgroundColor: '#ffd60a', 
-            color: '#1f2937', 
-            textAlign: 'center',
-            fontSize: '0.875rem', 
-            fontWeight: '500', 
-            transitionProperty: 'transform, opacity',
-            transitionDuration: '0.3s',
-            float: 'right'
-        },
-        onClick: (e) => {
-            console.log('Next button clicked');
-            handleNextStep();
-          }
-    }
-
-      const stepStyles = {
-
-            stepone: 
-            {
-                backgroundColor: 'red',
-                padding: '20px',
-                borderRadius: '5px',
-            },
-
-      };
-    
   return (
-    <div className='p-16 grid grid-cols-2 gap-4'>
-        <div className='w-12/12'>
-            Upload course here
+    // <>
+    <div className="min-h-screen  flex">
+    <div className="w-[14%] min-h-screen h-full ">
+      <Sidebar className="fixed"/>
+    </div>
 
-            <MultiStep activeStep={0} steps={steps} prevButton={prevbtn} nextButton={nextbtn} />
-        </div>
+    <div className="container mx-auto p-4 ">
 
-        <div>
-            Some message here
+    <div className="">
+      <Link to="/home" className='flex items-center text-sm'>
+        <FaChevronLeft className="mr-2" /> Go to Home
+      </Link>
+    </div>
+
+    <div className='grid grid-cols-2 '>
+
+      <CourseProvider>
+        <div className="p-10 mx-36 w-11/12">
+          <MultiStepForm />
         </div>
+      </CourseProvider>
+
+      <div className='px-20'>
+        <div className='bg-gray-900 p-10 rounded-lg border-2 border-gray-700 text-white w-10/12'>
+          <div>
+            <h2>⚡Course Upload Tips</h2>
+          </div>
+          <ul className='list-disc leading-8 ps-2 pt-4'>
+            <li>Set the Course Price option or make it free.</li>
+            <li>Standard size for the course thumbnail is 1024x576.</li>
+            <li>Video section controls the course overview video.</li>
+            <li>Course Builder is where you create & organize a course.</li>
+            <li>Add Topics in the Course Builder section to create lessons, quizzes, and assignments.</li>
+            <li>Information from the Additional Data section shows up on the course single page.</li>
+            <li>Make Announcements to notify any important</li>
+            <li>Notes to all enrolled students at once.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {/* // </> */}
+    </div>
     </div>
   )
 }

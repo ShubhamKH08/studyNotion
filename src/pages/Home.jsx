@@ -50,17 +50,19 @@ export default function Home() {
               </div>
             </div>
           </div>
+          {/* <div className=" after:absolute after:inset-0 after:z-0 after:blur-[70px] after:mx-auto after:h-full after:w-full after:rounded-full after:bg-[#12D8FA]          ">
+          </div> */}
           <motion.div
-            initial={{ rotateY:90,  }}
-            animate={{ rotateY:0 }}
+            initial={{ rotateY:120,scale:.5  }}
+            animate={{ rotateY:0,scale:1 }}
             transition={{
               type: "reverse",
-              duration:1
+              duration:2  
             }}
-            className="mx-auto  w-[80%]"
+            className="mx-auto  w-[80%]     "
           >
             <video
-              className=""
+              className="z-50 bg-black rounded"
               style={{ animation: "shadow-less-more 2s infinite" }}
               autoPlay
               muted

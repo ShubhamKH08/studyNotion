@@ -1,119 +1,267 @@
+import Sidebar from "../../../components/Instructor/Sidebar";
+import { useState, useEffect } from "react";
+import { X, Plus } from "react-feather";
+import axios from "axios";
+// import { useNavigate } from 'react-router-dom';
+import { CiLineHeight } from "react-icons/ci";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { MdModeEdit } from "react-icons/md";
+import UploadVideo from "../../../components/Upload/UploadVideo";
 
-import Sidebar from "../../../components/Instructor/Sidebar"
-import  { useState } from 'react';
-import { X, Plus, Code } from 'react-feather';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { RxCross2 } from "react-icons/rx";
 
 export default function CourseBuilder() {
-  
+  const [showUploadPopUp, setShowUploadPopUp] = useState(false);
 
+  const [lectures, setLectures] = useState(() => {
+    const storedLectures = localStorage.getItem("lectures");
+    return storedLectures
+      ? JSON.parse(storedLectures)
+      : [{ lecture: "Lecture-1" }];
+  });
 
- const [questions, setQuestions] = useState([{ content: '', marks: '' }]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handlePopup = () => {
-    setIsModalOpen(!isModalOpen);
+  useEffect(() => {
+    localStorage.setItem("lectures", JSON.stringify(lectures));
+  }, [lectures]);
+
+  const handleAddLecture = (lectureIndex) => {
+    const newLectures = [...lectures];
+    if (!newLectures[lectureIndex].subLectures) {
+      newLectures[lectureIndex].subLectures = [];
+    }
+    const lastLecture = newLectures[lectureIndex].lecture;
+    const newLecture = `${lastLecture}.${
+      newLectures[lectureIndex].subLectures.length + 1
+    }`;
+    newLectures[lectureIndex].subLectures.push(newLecture);
+    setLectures(newLectures);
+  };
+  //end of reload code
+  // const [lectures, setLectures] = useState([{ lecture: 'Lecture-1' }]);
+
+  // const handleAddLecture = (lectureIndex) => {
+  //   const newLectures = [...lectures];
+  //   if (!newLectures[lectureIndex].subLectures) {
+  //     newLectures[lectureIndex].subLectures = [];
+  //   }
+  //   const lastLecture = newLectures[lectureIndex].lecture;
+  //   const newLecture = `${lastLecture}.${newLectures[lectureIndex].subLectures.length + 1}`;
+  //   newLectures[lectureIndex].subLectures.push(newLecture);
+  //   setLectures(newLectures);
+  // };
+
+  const addSection = () => {
+    setLectures([
+      ...lectures,
+      { lecture: `Lecture-${lectures.length + 1}`, subLectures: [] },
+    ]);
   };
 
-  const handleQuestionChange = (questionIndex, field, newValue) => {
-    const newQuestions = [...questions];
-    newQuestions[questionIndex][field] = newValue;
-    setQuestions(newQuestions);
+  const handleInputFocus = () => {
+    setShowUploadPopUp(true);
+  };
+  const handleInputBlur = () => {
+    setShowUploadPopUp(false);
   };
 
-  const addQuestion = () => {
-    setQuestions([...questions, { content: '', marks: '' }]);
+  const handleVideoUpload = (videoData) => {
+    // Handle video upload data here
+    console.log("Uploaded video data:", videoData);
+    // You can send this data to your backend or manage it as needed
   };
 
-  const cancelQuestion = (questionIndex) => {
-    const newQuestions = [...questions];
-    newQuestions.splice(questionIndex, 1);
-    setQuestions(newQuestions);
+  const handleDeleteLecture = (lectureIndex, subLectureIndex) => {
+    const newLectures = [...lectures];
+    newLectures[lectureIndex].subLectures.splice(subLectureIndex, 1);
+    setLectures(newLectures);
   };
 
-  const confirmDelete = (questionIndex) => {
-    const isConfirmed = window.confirm('Are you sure you want to delete this question?');
+  const confirmDeleteLecture = (lectureIndex, subLectureIndex) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this lecture?"
+    );
     if (isConfirmed) {
-      cancelQuestion(questionIndex);
+      handleDeleteLecture(lectureIndex, subLectureIndex);
     }
   };
 
-//   const handleSubmit = async () => {
-//     try {
-//       const totalMarks = questions.reduce((acc, curr) => acc + (parseInt(curr.marks) || 0), 0);
+  const handleLectureChange = (lectureIndex, newValue) => {
+    const newLectures = [...lectures];
+    newLectures[lectureIndex].lecture = newValue;
+    setLectures(newLectures);
+  };
 
-//       // Send data to Flask backend
-//       const response = await axios.post('http://127.0.0.1:5000/api/QuestionPaperInsertion', {
-//         schoolName,
-//         course,
-//         currentDate,
-//         examName,
-//         department,
-//         examType,
-//         hours,
-//         instructions,
-//         scheduledDate,
-//         scheduledTime,
-//         totalMarks,
-//         questions
-//       });
-//       alert(`Data Send Sucessfully ${response.data.message}`)
-//       // Reset form after successful submission
-//       // (if needed)
-//     } catch (error) {
-//       alert(`Error submitting data: ${error}`);
-//     }
-//   };
+  const handleSubLectureChange = (lectureIndex, subLectureIndex, newValue) => {
+    const newLectures = [...lectures];
+    newLectures[lectureIndex].subLectures[subLectureIndex] = newValue;
+    setLectures(newLectures);
+  };
 
+  const confirmDeleteSubLecture = (lectureIndex, subLectureIndex) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this sub-lecture?"
+    );
+    if (isConfirmed) {
+      const newLectures = [...lectures];
+      newLectures[lectureIndex].subLectures.splice(subLectureIndex, 1);
+      setLectures(newLectures);
+    }
+  };
+
+  const saveLecturesToBackend = () => {
+    // Make a POST request to your backend API to save the lecture data
+    axios
+      .post("your-backend-endpoint", lectures)
+      .then((response) => {
+        console.log("Lectures saved successfully:", response.data);
+        // Optionally, handle any success actions here
+      })
+      .catch((error) => {
+        console.error("Error saving lectures:", error);
+        // Optionally, handle any error actions here
+      });
+  };
 
   return (
-    <div className="min-h-screen  flex">
-       <div className="w-[25%] h-screen ">
-        <Sidebar className="fixed"/>
+    <div className="min-h-screen  flex relative">
+      <div className="w-[25%] min-h-screen bg-gray-800">
+        <Sidebar className="fixed" />
       </div>
 
+      {showUploadPopUp && (
+        <div className=" bg-slate-900 bg-opacity-1 absolute inset-0 z-10 bg-opacity-60">
+        <div className="z-10 absolute translate-x-[55%] flex flex-col justify-center items-center w-[42%]  border-2 bg- rounded-xl bg-grayPopUp">
+          <div className="w-full px-4 rounded-xl py-2 flex justify-between text-white items-center bg-grayWhite font-bold">
+            <span>Editing Lecture</span>
+            <RxCross2 className="w-6 h-6 cursor-pointer hover:text-red-600 hover:scale-125 duration-75" onClick={handleInputBlur} />
+          </div>
+          <UploadVideo onVideoUpload={handleVideoUpload} onClose={handleInputBlur} className="w-full p-1" />
+        </div>
+        </div>
+      )}
+
       <div className="container mx-auto p-4 ">
-        <div className="m-4  border border-[#2C333F] p-4 rounded-xl bg-[#161D29]">
+        <div className="m-4  border border-[#2C333F] p-4 rounded-xl bg-[#161D29] ">
           <h2 className="text-2xl font-bold">Course Builder</h2>
-          {questions.map((question, questionIndex) => (
-            <div key={questionIndex} className="my-4">
-              <div className="flex flex-col md:flex-row items-center justify-between">
-                <input
-                  className="w-full md:w-[80%] p-2 border rounded mb-2 md:mb-0 md:mr-2 focus:outline-none focus:ring focus:border-blue-300 bg-[#2C333F]"
-                  placeholder={`Question ${questionIndex + 1}`}
-                  value={question.content}
-                  onChange={(e) => handleQuestionChange(questionIndex, 'content', e.target.value)}
-                ></input>
-                {/* <input
-                  className="w-full md:w-1/4 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
-                  type="number"
-                  placeholder="Marks"
-                  value={question.marks}
-                  onChange={(e) => handleQuestionChange(questionIndex, 'marks', e.target.value)}
-                />
-                <X
-                  className="cursor-pointer text-red-500 hover:text-red-700 ml-2"
-                  size={24}
-                  onClick={() => confirmDelete(questionIndex)}
-                /> */}
+          <div className="bg-[#2C333F] p-1 m-4 rounded-xl">
+            {lectures.map((lecture, lectureIndex) => (
+              <div key={lectureIndex} className="my-4 ">
+                <div className="flex flex-col  justify-between m-2 relative ">
+                  <div className="flex flex-col m-1 ">
+                    <CiLineHeight className="absolute w-6 h-6  translate-y-[68%]  ml-2" />
+                    <input
+                      type="text"
+                      className="indent-8 hover:scale-105 duration-75 cursor-pointer w-full  p-2 my-2  rounded  outline-none border-0 border-b-[1px] bg-[#2C333F] hover:border-secondaryText hover:text-secondaryText hover:bg-gray-900"
+                      placeholder={`Lecture ${lectureIndex + 1}`}
+                      value={lecture.lecture}
+                      onChange={(e) =>
+                        handleLectureChange(lectureIndex, e.target.value)
+                      }
+                    />
+
+                    {lecture.subLectures &&
+                      lecture.subLectures.map((subLecture, subLectureIndex) => (
+                        <div
+                          key={subLectureIndex}
+                          className="flex items-center pl-4 relative  "
+                        >
+                          <CiLineHeight className="absolute w-6 h-6    ml-2" />
+
+                          <input
+                            type="text"
+                            className="indent-8 cursor-pointer hover:scale-105 duration-75 w-full p-2 border-0 outline-none  border-b-[1px] hover:border-yellow-200 hover:text-secondaryText hover:bg-gray-800 rounded my-1  bg-[#2C333F] "
+                            placeholder={`Sub Lecture ${subLectureIndex + 1}`}
+                            value={subLecture}
+                            onChange={(e) =>
+                              handleSubLectureChange(
+                                lectureIndex,
+                                subLectureIndex,
+                                e.target.value
+                              )
+                            }
+                            onFocus={handleInputFocus}
+                            // onBlur={handleInputBlur}
+                          />
+                          <MdModeEdit
+                            className="cursor-pointer hover:scale-105 duration-75 text-[#6E727F] hover:text-green-400 absolute right-10"
+                            size={24}
+                          />
+                          <RiDeleteBinLine
+                            className="cursor-pointer hover:scale-105 duration-75 text-[#6E727F] hover:text-red-600 absolute right-0"
+                            size={24}
+                            onClick={() =>
+                              confirmDeleteSubLecture(
+                                lectureIndex,
+                                subLectureIndex
+                              )
+                            }
+                          />
+                        </div>
+                      ))}
+                  </div>
+                  <div className="flex">
+                    <button
+                      className="text-yellow-300 hover:scale-105 duration-75 hover:text-secondaryText font-bold py-2 px-4 rounded mr-2"
+                      onClick={() => handleAddLecture(lectureIndex)}
+                    >
+                      <Plus className="inline-block mr-2    text-yellow-300" />{" "}
+                      Add Lectures
+                    </button>
+                    {/* <X
+                    className="cursor-pointer text-red-500 hover:text-red-700"
+                    size={24}
+                    onClick={() => confirmDeleteLecture(lectureIndex)}
+                  /> */}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
           <button
-            className=" text-yellow-300 border border-yellow-300 hover:shadow-md hover:scale-105 duration-75 hover:shadow-secondaryText font-bold py-2 px-4 rounded"
-            onClick={addQuestion}
+            className="text-yellow-300 border border-yellow-300 hover:shadow-md hover:scale-105 duration-75 hover:shadow-secondaryText font-bold py-2 px-4 rounded"
+            onClick={addSection}
           >
-            <Plus className="inline-block mr-2 text-yellow-300" /> Create Section
+            <Plus className="inline-block mr-2 text-yellow-300" /> Create
+            Section
+          </button>
+        </div>
+        <div className="flex gap-4 justify-end px-4">
+          <button className=" border   hover:shadow-md hover:scale-105 duration-75  font-bold py-2 px-4 rounded">
+            Back
+          </button>
+
+          <button
+            className="bg-secondaryText border  border-yellow-300 hover:shadow-md hover:scale-105 duration-75 text-primaryBg font-bold py-2 px-4 rounded"
+            onClick={saveLecturesToBackend}
+          >
+            Next
           </button>
         </div>
       </div>
-
-      <div className="w-1/2  p-4 ">
+      <div className="w-1/2 h-1/2  p-4 ">
         <div className="border border-[#2C333F] rounded-xl w-full h-1/2 bg-[#161D29] p-4">
           <div className="font-bold text-xl">⚡Course Upload Tips</div>
+
+          <ul className="list-disc pl-6 mt-4">
+            <li>Set the Course Price option or make it free.</li>
+            <li>Standard size for the course thumbnail is 1024x576.</li>
+            <li>Video section controls the course overview video.</li>
+            <li>Course Builder is where you create & organize a course.</li>
+            <li>
+              Add Topics in the Course Builder section to create lessons,
+              quizzes, and assignments.
+            </li>
+            <li>
+              Information from the Additional Data section shows up on the
+              course single page.
+            </li>
+            <li>
+              Make Announcements to notify any important notes to all enrolled
+              students at once.
+            </li>
+          </ul>
         </div>
       </div>
-      
     </div>
   );
 }

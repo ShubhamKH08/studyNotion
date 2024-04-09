@@ -1,19 +1,24 @@
+import Sidebar from "../../components/Instructor/Sidebar";
 import "../../Style/Profile.css"
+import { BiSolidEdit } from "react-icons/bi";
 
 
 export default function Profile() {
   return (
    
     <div className="App">
+      <div className="w-[14%] min-h-screen bg-gray-800">
+        <Sidebar className="fixed" />
+      </div>
     
       <div className='prof'>
-      <div className='upperframe fixed w-[1217px] h-[120px] top-[57px] left-[223px] p-[24px, 120px, 24px, 24px] gap-24'>
+
+      <div className='upperframe  w-[1217px] h-[120px] top-[57px] left-[223px] p-[24px, 120px, 24px, 24px] gap-24'>
  
-
-
           <div className='prt1 w-[1073px] h-[72px] gap-3'>
             <div className='prt11 w-[1073px] h-[22px] gap-2'>
-            <div className='flex items-center'>
+
+            <div className='flex items-center m-4 '>
                 <div className='prt11a w-[40px] h-[22px] text-text-small font-inter text-sm font-regular leading-[22px] text-left text-[#838894]'>
                   Home
                 </div>
@@ -31,12 +36,9 @@ export default function Profile() {
             <div className='prt12 mt-3 w-[1073px] h-[38px] text-display-sm-medium font-inter text-xl font-bold leading-[38px] text-left text-[#F1F2FF]'>
                 My profile
             </div>
-
-            
-
           </div>
-
         </div>
+
         <div className='lowerframe custom-frame fixed w-[792px] h-[366px] top-[209px] left-[324px] gap-44'>
             <div className='prt2 w-full h-[126px] p-12 rounded-8 border-1 border-solid border-[#2C333F] gap-20 bg-[#161D29]'>
             <div className="flex items-center">
@@ -55,8 +57,8 @@ export default function Profile() {
         </div>
     </div>
 
-    <button className="flex items-center justify-center p-2 md:p-4 w-[96px] h-[40px] gap-2 bg-yellow-400 border border-gray-300 rounded-md shadow-md">
-        <span className="text-md font-medium font-inter text-[#000814]">EDIT</span>
+    <button className="flex items-center justify-center p-2 md:p-4 w-[96px] h-[40px] gap-2 bg-yellowBg border border-gray-300 rounded-md shadow-md">
+        <span className="text-md flex font-bold items-center font-inter text-[#000814]"><BiSolidEdit className="w-5 h-5 m-1" />Edit</span>
     </button>
 </div>
             </div>
@@ -66,9 +68,9 @@ export default function Profile() {
                     Personal Details
 
                   </div>
-                  <button className="flex items-center justify-center p-2 md:p-4 w-[96px] h-[40px] gap-2 bg-yellow-400 border border-gray-300 rounded-md shadow-md">
-                  <span className="text-md font-medium font-inter text-[#000814]">EDIT</span>
-              </button>
+                  <button className="flex items-center justify-center p-2 md:p-4 w-[96px] h-[40px] gap-2 bg-yellowBg border border-gray-300 rounded-md shadow-md">
+        <span className="text-md flex font-bold items-center font-inter text-[#000814]"><BiSolidEdit className="w-5 h-5 m-1" />Edit</span>
+    </button>
                   
                   
 

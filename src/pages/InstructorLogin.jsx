@@ -7,8 +7,10 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import axios  from "axios";
+import { useCookies } from 'react-cookie';
 
 function  InstructorLogin() {
+  const [cookies, setCookie] = useCookies(['name']);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -38,6 +40,10 @@ function  InstructorLogin() {
       console.log('data:',formData)
     const response  = await axios.post("http://localhost:4000/api/v1/auth/login",formData);
       console.log(response);
+      console.log("response:",response, "token:",response.data.token);
+      localStorage.setItem("token:", response.data.token);
+      setCookie('token', response.data.token);
+    
       navigate('/')
   }
     catch(err){
@@ -51,7 +57,7 @@ function  InstructorLogin() {
 
   const handleStudentLogin = () => {
     navigate("/studentlogin");
-  };
+  };  
 
   return (
     <>

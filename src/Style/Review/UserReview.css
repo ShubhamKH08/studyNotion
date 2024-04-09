@@ -1,0 +1,61 @@
+
+
+.review-slider-container {
+    overflow: hidden;
+    
+  }
+  
+  .review-slider {
+    display: flex;
+  }
+  
+  .review-card-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 100px
+  }
+  
+  .review-card {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 230px;
+    font-size: small;
+    margin-right: 20px;
+    background:  rgb(22 29 41);
+    border-radius: 5px;
+    scroll-snap-align: center;
+  }
+  
+  .review-content {
+    padding: 20px;
+  }
+  
+  .review-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .review-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .review-name,
+  .review-course,
+  .review-text,
+  .rating-value {
+    margin: 0;
+  }
+  
+  .center {
+    transform: scale(1.1);
+  }
+  
+  .review-rating {
+    display: flex;
+    align-items: center;
+  }
+  

@@ -11,8 +11,8 @@ const InputField = ({ label, type, placeholder, value, onChange, errorMessage, s
 
   return (
     <div className="mb-4 relative">
-      <label htmlFor={name} className="block text-sm font-normal text-slate-200 opacity-95">
-        {label} {required && <span className="text-red-500">*</span>}</label>
+      <label htmlFor={name} className="block text-sm font-normal text-slate-200 opacity-95 relative after:absolute after:content-['*'] after:text-red-600 after:indent-1 after:scale-125">
+        {label} {required  }</label>
       <div className="relative">
         <input
           type={type === "password" && showPassword ? "text" : type}
@@ -24,7 +24,7 @@ const InputField = ({ label, type, placeholder, value, onChange, errorMessage, s
           disabled={disabled}
           defaultValue={defaultvalue}
           required={required}
-          className="pl-4 w-full mt-1 block border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-100 sm:text-sm border-b-2 h-10 bg-gray-900"
+          className="pl-4 w-full mt-1 block border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-100 sm:text-sm border-b-[2px] h-10 bg-grayPopUp text-grayText font-bold"
         />
         {showIcon && (
           <span

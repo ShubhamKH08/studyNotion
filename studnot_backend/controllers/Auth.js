@@ -14,12 +14,12 @@ const requestIp = require('request-ip');
 exports.sendotp = async (req, res) => {
   try {
     const { email } = req.body;
-    console.log('email is: '+email)
     // Check if user is already present
     // Find user with provided email
     const checkUserPresent = await User.findOne({ email });
     // to be used in case of signup
 
+    console.log('USER PRESENT 1');
     // If user found with provided email
     if (checkUserPresent) {
       // Return 401 Unauthorized status code with error message
@@ -29,11 +29,17 @@ exports.sendotp = async (req, res) => {
       });
     }
 
+    console.log('USER PRESENT 2');
+
     var otp = otpGenerator.generate(6, {
       upperCaseAlphabets: false,
       lowerCaseAlphabets: false,
       specialChars: false,
     });
+
+    
+    console.log('USER PRESENT 3');
+
     const result = await OTP.findOne({ otp: otp });
     console.log("Result is Generate OTP Func");
     console.log("OTP", otp);
@@ -47,6 +53,8 @@ exports.sendotp = async (req, res) => {
     }
     
 
+    console.log('USER PRESENT 4');
+
     const otpBody = await OTP.create({ email, otp, });
     console.log("OTP Body", otpBody);
     res.status(200).json({
@@ -54,6 +62,9 @@ exports.sendotp = async (req, res) => {
       message: `OTP Sent Successfully`,
       otp,
     });
+
+    
+    console.log('USER PRESENT 5');
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ success: false, error: error.message });
@@ -117,6 +128,7 @@ exports.signup = async (req, res) => {
     // Find the most recent OTP for the email
     const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
     console.log("response", response);
+    
     if (response.length === 0) {
       // OTP not found for the email
       return res.status(400).json({
@@ -200,17 +212,17 @@ exports.login = async (req, res) => {
     }
 
     // Check if user has an active session
-    if (user.activeSession) {
+    // if (user.activeSession) {
 
-      console.log("the token is" , user.token);
-      return res.status(401).json({
-        success: false,
-        message: "User is already logged in on another device.",
-        activeDevices: user.deviceTokens,
-        activeDeviceIP: user.activeDeviceIP,
-        lastLogin: user.lastLogin
-      });
-    }
+    //   console.log("the token is" , user.token);
+    //   return res.status(401).json({
+    //     success: false,
+    //     activeDevices: user.deviceTokens,
+    //     message: "User is already logged in on another device."+ user.activeDeviceIP + "LAST LOGIN: " + user.lastLogin,
+    //     activeDeviceIP: user.activeDeviceIP,
+    //     lastLogin: user.lastLogin
+    //   });
+    // }
 
     if (await bcrypt.compare(password, user.password)) {
       const payload = {

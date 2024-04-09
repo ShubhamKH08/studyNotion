@@ -1,85 +1,176 @@
-.box {
+.box{
   margin-top: 68px;
   width: 913px;
   height: 276px;
-}
+
+ 
 
 
-.box1b {
-  margin-top: 38px;
 }
-.box1bb {
+body{
+  background-color: #000814;
+}
+
+.box1b{
+  margin-top: 38px;;
+}
+.box1bb{
   margin-top: 16px;
 }
-.box1c {
+.box1c{
   margin-top: 38px;
 }
 /* Frame 34 */
-.img1 {
-  /* Frame 37 */
-  /* width: 1035px;
-  height: 515px;
-  left: 203px;
-  top: 458px; */
-  filter: drop-shadow(20px 20px 0px #f5f5f5);
+.img1{
+/* Frame 37 */
+
+position: absolute;
+width: 1035px;
+height: 515px;
+left: 203px;
+top: 458px;
+
+background: url(src/assets/images/img12.png);
+filter: drop-shadow(20px 20px 0px #F5F5F5);
 }
-.box2 {
+.img2{
+  height:320px;
+  width:100%;
+  background: url(src/assets/images/bghome.svg);
+
+}
+.img5{
+  height:340px;
+  width:341px;
+  background:url(src/assets/images/Know_your_progress.png);
+ 
+}
+.l1{
+  margin-left: 531.5px;
+}
+.img6{
+  height:352px;
+  width:341px;
+  background:url(src/assets/images/Compare_with_others.png);
+}
+.img7{
+  height:290px;
+  width:341px;
+  background:url(src/assets/images/Plan_your_lessons.png);
+
+}
+.card2{
+  background: url(src/assets/images/bghome.svg);
+}
+.card3{
+  background: url(src/assets/images/bghome.svg);
+}
+
+.box2{
   margin-top: 650px;
   width: 100%;
 }
-.box2a {
+.box2a{
   margin-top: 119px;
   margin-left: 161px;
   gap: 12px;
+ 
+
 }
-.box2b {
+.box2b{
   margin-top: 20px;
+  
+
 }
-.box2c {
+.box2c{
   margin-top: 84px;
   margin-right: 148px;
 }
-.box3 {
+.box3{
   margin-top: 90px;
-  background-color: antiquewhite;
+
   margin-left: 98px;
 }
-.box3a {
-  margin: 32px;
+.box3a{
+  margin:32px;
 }
-.box4 {
+.box4{
   width: 100%;
 }
-.box4a {
+.box4a{
   margin-top: 210px;
   margin-left: 161px;
+  
 }
-.box4b {
-  margin-top: 231px;
+.box4b{
+  margin-top:231px;
   margin-left: 98px;
+
 }
-.box5a {
+.box5a{
   margin-top: 210px;
 }
-.box5c {
-  margin-top: 250px;
+.box5c{
+  margin-top:250px;
 }
 
-.kp {
-  filter: drop-shadow(10px 10px 0px #ffd60a);
+.kp{
+  filter: drop-shadow(10px 10px 0px #FFD60A);
 }
 
-@keyframes shadow-glow {
-  0% {
-    box-shadow: 0px 0px 40px 2px rgba(166, 252, 255, 0.56);
-  }
+.container-wrapper {
+  background-color: #ffffff; /* Set the background color to white */
+  padding: 32px 0; /* Adjust padding as needed */
 }
 
-@keyframes shadow-less-more {
-  0%, 100% {
-    box-shadow: 0px 0px 10px 2px rgba(166, 234, 255, 0.56);
-  }
-  50% {
-    box-shadow: 0px 0px 20px 2px rgba(166, 252, 255, .80);
+.container-group {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.kp1{
+  position:absolute;
+  z-index:-1;
+}
+.bx1{
+  margin-top: 90px;
+  margin-left: 120px;
+}
+.bx2{
+  align-content: center;
+  align-items: center;
+}
+.img3{
+  background: url(src/assets/images/img1.png);
+  margin-left: 10px;
+
+}
+@img3 utilities {
+  .shadow-white {
+    box-shadow: 20px 20px 0px 0px #FFFFFF;
   }
 }
+.bx4{
+  margin-top: 481px;
+  
+}
+.te{
+  font-size: 40px;
+}
+.img8{
+  background: url(src/assets/images/Instructor.png);
+  box-shadow: -20px -20px 0px 0px #FFFFFF;
+}
+.typewriterr1{
+  height: 534px;
+  width: 342px;
+  padding: 8px;
+}
+
+.special{
+opacity: 0.2;
+}
+

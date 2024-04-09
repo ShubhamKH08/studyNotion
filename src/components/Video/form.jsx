@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import InputField from "../InputField";
+
 
 export default function From() {
   const [video, setVideo] = useState(null);
@@ -33,8 +35,8 @@ export default function From() {
 
   return (
     <div className="flex item-center justify-center">
-      <input
-        className="text-black"
+      <div className=""></div>
+      <InputField
         value={video || ""}
         onChange={(e) => setVideo(e.target.value)}
         type="text"

@@ -61,7 +61,7 @@ exports.categoryPageDetails = async (req,res) => {
         //get categoryId
         const {categoryId} = req.body;
         //get courses for specified categoryId
-        const selectedCategory = await Category.findById(categoryId)
+        const selectedCategory = await Category.findOne({name:categoryId})
                                         .populate("courses")
                                         .exec();
         //validation
