@@ -2,11 +2,8 @@ import "../Style/Home.css";
 import BannerVideo from "../assets/video/Home_page_banner.mp4";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa";
-import Form from "./../components/Video/form";
-import Gallery from "../components/Video/gallery";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-// import Upload from "../components/Video/Upload";
 
 export default function Home() {
   return (
@@ -21,9 +18,7 @@ export default function Home() {
               </button>
             </div>
 
-            {/* <Upload/> */}
-            <Form/>
-
+       
             <div className=" text-white my-4  mx-auto w-[913px] h-[120 px] gap-16">
               <div className="box1ba w-[913px] h-[44px] text-[#FFFFFF] font-display font-medium text-4xl leading-[44px] tracking-tighter text-center">
                 Empower Your Future with{" "}

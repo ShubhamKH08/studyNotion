@@ -11,7 +11,6 @@ import InstructorSingUp from "./pages/InstructorSignUp";
 import Instructor from "./pages/Instructor";
 import UploadCourse from "./pages/UploadCourse";
 import EnrolledCourses from "./components/Student/EnrolledCourses";
-import Upload from "./components/Video/Upload";
 import Profile from "./pages/Profile/Profile";
 import OtpScreen from "./components/Auth/OtpScreen";
 // import Footer from "./components/Footer";
@@ -44,7 +43,6 @@ function App() {
           <Route path="/instructor-course" element={<Instructor />} />
           <Route path="/uploadcourse" element={<UploadCourse />} />{/* courae Inform,ation page */}
           <Route path="/enrolled-course" element={<EnrolledCourses />} />
-          <Route path="/upload" element={<Upload />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/course" element={<CourseDetails />} />
           <Route path="/course-builder" element={<CourseBuilder />} />
