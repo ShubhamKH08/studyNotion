@@ -13,10 +13,10 @@ import CourseContext from "../../../Context/courseContext";
 export default function CourseBuilder() {
   const { courseData, setCourseData } = useContext(CourseContext);
   const [token, setToken] = useState("");
- const [newCourseID, setNewCourseID] = useState("")
+  const [newCourseID, setNewCourseID] = useState("");
   useEffect(() => {
     setToken(localStorage.getItem("token:"));
-    setNewCourseID(localStorage.getItem('newCourseID'))
+    setNewCourseID(localStorage.getItem("newCourseID"));
   }, [token, newCourseID]);
 
   const handleChange = (e) => {
@@ -70,21 +70,24 @@ export default function CourseBuilder() {
       { lecture: `Lecture-${lectures.length + 1}`, subLectures: [] },
     ]);
 
-    const sectionData = { sectionName: `Lecture-${lectures.length + 1}`,
-  courseId: newCourseID};
-  console.log("jud  :  ",sectionData.courseId);
-
-  
     const headers = {
-      'Authorization': `Bearer ${token}`,
-      'Account-Type': "Instructor"
+      Authorization: `Bearer ${token}`,
+      "Account-Type": "Instructor",
     };
 
+    const sectionData = {
+      sectionName: `Lecture-${lectures.length + 1}`,
+      courseId: newCourseID,
+    };
+
+    console.log("course  :  ", sectionData.courseId, 'new corse id', newCourseID);
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/course/addSection",sectionData,{ headers }
+        "http://localhost:4000/api/v1/course/addSection",
+        sectionData,
+        { headers }
       );
-      console.log(response)
+      console.log(response);
     } catch (e) {
       console.log(e);
     }
@@ -279,15 +282,15 @@ export default function CourseBuilder() {
           </button>
         </div>
         <div className="flex gap-4 justify-end px-4">
-          <button className=" border   hover:shadow-md hover:scale-105 duration-75  font-bold py-2 px-4 rounded">
+          {/* <button className=" border   hover:shadow-md hover:scale-105 duration-75  font-bold py-2 px-4 rounded">
             Back
-          </button>
+          </button> */}
 
           <button
             className="bg-secondaryText border  border-yellow-300 hover:shadow-md hover:scale-105 duration-75 text-primaryBg font-bold py-2 px-4 rounded"
             onClick={saveLecturesToBackend}
           >
-            Next
+            Save Lectures
           </button>
         </div>
       </div>

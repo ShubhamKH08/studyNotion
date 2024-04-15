@@ -5,6 +5,11 @@ const sectionSchema = new mongoose.Schema({
 	sectionName: {
 		type: String,
 	},
+	courseId: {
+		type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: "CourseId",
+	},
 	subSection: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

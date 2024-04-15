@@ -56,10 +56,12 @@ const StepOne = () => {
         // Send request with token included in headers
         const response = await axios.post("http://localhost:4000/api/v1/course/createCourse", courseData, { headers });
         console.log('response is:', response);
-        localStorage.setItem("newCourseID",response.data._id);
+        localStorage.setItem("newCourseID",response.data.data._id);
     } catch (e) {
         // Handle errors
         console.error("Error saving course data:", e);
+        if(e.response && e.response.status == 400){
+        alert("All fields are mandatory");}
     }
 };
 

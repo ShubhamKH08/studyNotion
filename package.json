@@ -10,15 +10,13 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "postinstall": "prisma generate",
-    "vercel-build": "prisma generate && vite build"
+    "vercel-build": "vite build"
   },
   "dependencies": {
     "@coreui/icons": "^3.0.1",
     "@coreui/icons-react": "^2.2.1",
     "@heroicons/react": "^2.1.1",
     "@material-tailwind/react": "^2.1.9",
-    "@prisma/client": "^5.11.0",
     "@ramonak/react-progress-bar": "^5.2.0",
     "aos": "^2.3.4",
     "axios": "^1.6.7",
