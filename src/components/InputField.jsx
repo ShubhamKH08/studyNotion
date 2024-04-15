@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { BiShow, BiHide } from "react-icons/bi";
 
-const InputField = ({ label, type, placeholder, value, onChange, errorMessage, showError, name, showIcon, required, disabled, defaultvalue }) => {
+const InputField = ({ label, type, placeholder, value, onChange, errorMessage, showError, name, showIcon, required, disabled, defaultvalue, className, labelClassName }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -11,7 +11,7 @@ const InputField = ({ label, type, placeholder, value, onChange, errorMessage, s
 
   return (
     <div className="mb-4 relative">
-      <label htmlFor={name} className="block text-sm font-normal text-slate-200 opacity-95 relative after:absolute after:content-['*'] after:text-red-600 after:indent-1 after:scale-125">
+      <label htmlFor={name} className={`block text-sm font-normal text-slate-200 opacity-95 relative after:absolute after:content-['*'] after:text-red-600 after:indent-1 after:scale-125 ${labelClassName}`}>
         {label} {required  }</label>
       <div className="relative">
         <input
@@ -24,7 +24,7 @@ const InputField = ({ label, type, placeholder, value, onChange, errorMessage, s
           disabled={disabled}
           defaultValue={defaultvalue}
           required={required}
-          className="pl-4 w-full mt-1 block border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-100 sm:text-sm border-b-[2px] h-10 bg-grayPopUp text-grayText font-bold"
+          className={`pl-4 w-full mt-1 block border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-100 sm:text-sm border-b-[2px] h-10 bg-grayPopUp text-grayText font-bold ${className}`}
         />
         {showIcon && (
           <span

@@ -1,0 +1,147 @@
+body{
+    background-color:#000814;
+  
+  }
+  .prt2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    position: relative; /* Add this line to make positioning of prt21 relative to prt2 */
+  }
+  .prt21 {
+    width: 628px;
+    height: 78px;
+  
+    margin-bottom: 24px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    
+  
+  }
+  
+  .prt31{
+    width: 100%; /* Fills the available width */
+    height: 40px;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 8px;
+    
+    margin-top: 12px;
+   
+  }
+  .prt32{
+    width: 100%; /* Fills the available width */
+    
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 8px;
+    margin-top: 24px;
+   
+  }
+  .prt32b{
+    width: 100%; /* Fills the available width */
+    height: 40px;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 8px;
+  
+  }
+  
+  
+  /* CSS for the email address class */
+  .email-address {
+    width: 157px;
+    height: 22px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #838894; /* Customize the color as needed */
+    margin-top: 10px;
+  }
+  
+  .prt311{
+    width: 628px;
+      height: 26px;
+      font-family: Inter;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 26px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: #F1F2FF;
+  }
+  .prt321{
+    width: 370px;
+    height: 22px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #424854;
+  
+  
+  }
+
+  
+  .prt322{
+      width: 370px;
+      height: 22px;
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: 0em;
+      text-align: left;
+      color:#424854; /* Text color */
+   
+  }
+  .prt323{
+    width: 370px;
+    height: 22px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #F1F2FF; /* Text color */
+  }
+  .prt324{
+    width: 370px;
+    height: 22px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #F1F2FF; /* Text color */
+  
+  }
+  .prt33{
+    width: 370px;
+    height: 22px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color:#838894;/* Text color */
+  
+  }
+
+  

@@ -1,49 +1,68 @@
 
 import StepOne from './StepOne';
-import StepTwo from './StepTwo';
+// import StepTwo from './StepTwo';
+import CourseBuilder from '../pages/Instructor/DashBoard/CourseBuilder';
 import StepThree from './StepThree';
 import Multistep from 'react-multistep';
+import { transform } from 'typescript';
 
 const steps = [
   { component: <StepOne /> },
-  { component: <StepTwo /> },
-  { component: <StepThree /> },
+  { component: <CourseBuilder /> },
+  { component: <StepThree /> }
 ];
 
 const prevButton = {
-  title: '< Back',
+  title: 'Back',
   style: {
-    backgroundColor: '#161D29',
-    borderRadius: '0.375rem',
+    'background-color': '#161D29',
+    'border-radius': '0.375rem',
+    'border-color':'white',
+    border: '1px solid',
     color: 'white',
-    textAlign: 'center',
-    fontSize: '0.875rem',
-    fontWeight: '500',
+    'text-align': 'center',
+    'font-size': '1rem',
+'line-height': '1.5rem',
+    'font-weight': '500',
     height: '3.2rem',
     cursor: 'pointer',
-    padding: '0 1rem',
-    marginTop: '1rem'
+    'margin-top':'10px',
+    padding: '0 1.6rem',
+    transition: 'transform 0.2s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.2)',
+    },
   }
 }
 const nextButton = {
-  title: 'Next >',
+  title: 'Next ',
   style: {
-    backgroundColor: '#FFD60A',
-    borderRadius: '0.375rem',
+    'background-color': '#faca15',
+    'border-radius': '0.375rem',
+    'border-color': 'yellow',
+    'margin-top':'10px',
     color: '#1f2937',
-    textAlign: 'center',
-    fontSize: '0.875rem',
-    fontWeight: '500',
+    'text-align': 'center',
+    'font-size': '1rem',
+    'line-height': '1.5rem',
+    'font-weight': 'bold',
     height: '3rem',
     cursor: 'pointer',
-    padding: '0 1rem',
-    marginTop: '1rem',
-    marginLeft: '28rem'
-  }
+    padding: '0 1.6rem',
+    marginLeft: '28rem',
+    transform: 'translateX(140%)',
+    transition: 'transform 0.2s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.2)',
+    },
+  },
 }
 
 const stepCustomStyle = {
-  color: "#FFD60A"
+
+  width: '100%',
+  'font-size': '140%',
+
 };
 
 const MultiStepForm = () => {

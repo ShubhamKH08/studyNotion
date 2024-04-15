@@ -1,5 +1,5 @@
-import Sidebar from "../../../components/Instructor/Sidebar";
-import { useState, useEffect } from "react";
+// import Sidebar from "../../../components/Instructor/Sidebar";
+import { useState, useEffect, useContext } from "react";
 import { X, Plus } from "react-feather";
 import axios from "axios";
 // import { useNavigate } from 'react-router-dom';
@@ -7,10 +7,24 @@ import { CiLineHeight } from "react-icons/ci";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { MdModeEdit } from "react-icons/md";
 import UploadVideo from "../../../components/Upload/UploadVideo";
-
 import { RxCross2 } from "react-icons/rx";
+import CourseContext from "../../../Context/courseContext";
 
 export default function CourseBuilder() {
+  const { courseData, setCourseData } = useContext(CourseContext);
+  const [token, setToken] = useState("");
+ const [newCourseID, setNewCourseID] = useState("")
+  useEffect(() => {
+    setToken(localStorage.getItem("token:"));
+    setNewCourseID(localStorage.getItem('newCourseID'))
+  }, [token, newCourseID]);
+
+  const handleChange = (e) => {
+    setCourseData({
+      ...courseData,
+      description: e.target.value,
+    });
+  };
   const [showUploadPopUp, setShowUploadPopUp] = useState(false);
 
   const [lectures, setLectures] = useState(() => {
@@ -50,11 +64,41 @@ export default function CourseBuilder() {
   //   setLectures(newLectures);
   // };
 
-  const addSection = () => {
+  const addSection = async () => {
     setLectures([
       ...lectures,
       { lecture: `Lecture-${lectures.length + 1}`, subLectures: [] },
     ]);
+
+    const sectionData = { sectionName: `Lecture-${lectures.length + 1}`,
+  courseId: newCourseID};
+  console.log("jud  :  ",sectionData.courseId);
+
+  
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Account-Type': "Instructor"
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/course/addSection",sectionData,{ headers }
+      );
+      console.log(response)
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const removeSection = (lectureIndex) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this lecture?"
+    );
+    if (isConfirmed) {
+      const newLectures = [...lectures];
+      newLectures.splice(lectureIndex, 1); // Remove the section at the specified index
+      setLectures(newLectures);
+    }
   };
 
   const handleInputFocus = () => {
@@ -123,20 +167,27 @@ export default function CourseBuilder() {
   };
 
   return (
-    <div className="min-h-screen  flex relative">
-      <div className="w-[25%] min-h-screen bg-gray-800">
+    <div className="min-h-40  flex relative">
+      {/* <div className="w-[25%] min-h-screen bg-gray-800">
         <Sidebar className="fixed" />
-      </div>
+      </div> */}
 
       {showUploadPopUp && (
         <div className=" bg-slate-900 bg-opacity-1 absolute inset-0 z-10 bg-opacity-60">
-        <div className="z-10 absolute translate-x-[55%] flex flex-col justify-center items-center w-[42%]  border-2 bg- rounded-xl bg-grayPopUp">
-          <div className="w-full px-4 rounded-xl py-2 flex justify-between text-white items-center bg-grayWhite font-bold">
-            <span>Editing Lecture</span>
-            <RxCross2 className="w-6 h-6 cursor-pointer hover:text-red-600 hover:scale-125 duration-75" onClick={handleInputBlur} />
+          <div className="z-10 absolute translate-x-[55%] flex flex-col justify-center items-center w-[100%]  border-2 bg- rounded-xl bg-grayPopUp">
+            <div className="w-full px-4 rounded-xl py-2 flex justify-between text-white items-center bg-grayWhite font-bold">
+              <span>Editing Lecture</span>
+              <RxCross2
+                className="w-6 h-6 cursor-pointer hover:text-red-600 hover:scale-125 duration-75"
+                onClick={handleInputBlur}
+              />
+            </div>
+            <UploadVideo
+              onVideoUpload={handleVideoUpload}
+              onClose={handleInputBlur}
+              className="w-full p-1"
+            />
           </div>
-          <UploadVideo onVideoUpload={handleVideoUpload} onClose={handleInputBlur} className="w-full p-1" />
-        </div>
         </div>
       )}
 
@@ -148,16 +199,23 @@ export default function CourseBuilder() {
               <div key={lectureIndex} className="my-4 ">
                 <div className="flex flex-col  justify-between m-2 relative ">
                   <div className="flex flex-col m-1 ">
-                    <CiLineHeight className="absolute w-6 h-6  translate-y-[68%]  ml-2" />
-                    <input
-                      type="text"
-                      className="indent-8 hover:scale-105 duration-75 cursor-pointer w-full  p-2 my-2  rounded  outline-none border-0 border-b-[1px] bg-[#2C333F] hover:border-secondaryText hover:text-secondaryText hover:bg-gray-900"
-                      placeholder={`Lecture ${lectureIndex + 1}`}
-                      value={lecture.lecture}
-                      onChange={(e) =>
-                        handleLectureChange(lectureIndex, e.target.value)
-                      }
-                    />
+                    <div className="flex gap-4">
+                      <CiLineHeight className="absolute w-6 h-6  translate-y-[68%]  ml-2" />
+                      <input
+                        type="text"
+                        className="indent-8 hover:scale-105 duration-75 cursor-pointer w-full  p-2 my-2  rounded  outline-none border-0 border-b-[1px] bg-[#2C333F] hover:border-secondaryText hover:text-secondaryText hover:bg-gray-900"
+                        placeholder={`Lecture ${lectureIndex + 1}`}
+                        value={lecture.lecture}
+                        onChange={(e) =>
+                          handleLectureChange(lectureIndex, e.target.value)
+                        }
+                      />
+                      <X
+                        className="cursor-pointer text-red-500 hover:text-red-700"
+                        size={24}
+                        onClick={() => removeSection(lectureIndex)}
+                      />
+                    </div>
 
                     {lecture.subLectures &&
                       lecture.subLectures.map((subLecture, subLectureIndex) => (
@@ -207,11 +265,6 @@ export default function CourseBuilder() {
                       <Plus className="inline-block mr-2    text-yellow-300" />{" "}
                       Add Lectures
                     </button>
-                    {/* <X
-                    className="cursor-pointer text-red-500 hover:text-red-700"
-                    size={24}
-                    onClick={() => confirmDeleteLecture(lectureIndex)}
-                  /> */}
                   </div>
                 </div>
               </div>
@@ -236,30 +289,6 @@ export default function CourseBuilder() {
           >
             Next
           </button>
-        </div>
-      </div>
-      <div className="w-1/2 h-1/2  p-4 ">
-        <div className="border border-[#2C333F] rounded-xl w-full h-1/2 bg-[#161D29] p-4">
-          <div className="font-bold text-xl">⚡Course Upload Tips</div>
-
-          <ul className="list-disc pl-6 mt-4">
-            <li>Set the Course Price option or make it free.</li>
-            <li>Standard size for the course thumbnail is 1024x576.</li>
-            <li>Video section controls the course overview video.</li>
-            <li>Course Builder is where you create & organize a course.</li>
-            <li>
-              Add Topics in the Course Builder section to create lessons,
-              quizzes, and assignments.
-            </li>
-            <li>
-              Information from the Additional Data section shows up on the
-              course single page.
-            </li>
-            <li>
-              Make Announcements to notify any important notes to all enrolled
-              students at once.
-            </li>
-          </ul>
         </div>
       </div>
     </div>

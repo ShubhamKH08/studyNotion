@@ -21,6 +21,7 @@ import NewPassword from "./components/Auth/ChooseNewPassword";
 import Footer from "./components/Footer";
 import CourseDetails from "./pages/Course/Details/CourseDetails";
 import CourseBuilder from "./pages/Instructor/DashBoard/CourseBuilder";
+import EditProfile from "./pages/Profile/EditProfile";
 // import About from "./pages/About/AboutUs";
 
 function App() {
@@ -47,7 +48,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/course" element={<CourseDetails />} />
           <Route path="/course-builder" element={<CourseBuilder />} />
-          {/* <Route path="/about" element={<About />} /> */}
+          <Route path="/edit" element={<EditProfile/>} />
+          {/* <Route path="/about"   element={<About />} /> */}
         </Routes>
       {/* <Footer/> */}
         </Router>

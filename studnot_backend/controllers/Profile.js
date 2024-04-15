@@ -2,45 +2,124 @@ const Profile = require("../models/Profile");
 const User = require("../models/User");
 
 
+// exports.updateProfile = async (req, res) => {
+//     try{
+//             //get data
+//             const {dateOfBirth="", about="", contactNumber, gender} = req.body;
+//             //get userId
+//             const id = req.user.id;
+//             //validation
+//             if(!contactNumber || !gender || !id) {
+//                 return res.status(400).json({
+//                     success:false,
+//                     message:'All fields are required',
+//                 });
+//             } 
+//             //find profile
+//             const userDetails = await User.findById(id);
+//             const profileId = userDetails.additionalDetails;
+//             const profileDetails = await Profile.findById(profileId);
+
+//             //update profile
+//             profileDetails.dateOfBirth = dateOfBirth;
+//             profileDetails.about = about;
+//             profileDetails.gender = gender;
+//             profileDetails.contactNumber = contactNumber;
+//             await profileDetails.save();
+//             //return response
+//             return res.status(200).json({
+//                 success:true,
+//                 message:'Profile Updated Successfully',
+//                 profileDetails,
+//             });
+
+//     }
+//     catch(error) {
+//         return res.status(500).json({
+//             success:false,
+//             error:error.message,
+//         });
+//     }
+// };  
+
 exports.updateProfile = async (req, res) => {
-    try{
-            //get data
-            const {dateOfBirth="", about="", contactNumber, gender} = req.body;
-            //get userId
-            const id = req.user.id;
-            //validation
-            if(!contactNumber || !gender || !id) {
-                return res.status(400).json({
-                    success:false,
-                    message:'All fields are required',
-                });
-            } 
-            //find profile
-            const userDetails = await User.findById(id);
-            const profileId = userDetails.additionalDetails;
-            const profileDetails = await Profile.findById(profileId);
+  try{
+          //get data
+          const {dateOfBirth="", about="", contactNumber, gender} = req.body;
 
-            //update profile
-            profileDetails.dateOfBirth = dateOfBirth;
-            profileDetails.about = about;
-            profileDetails.gender = gender;
-            profileDetails.contactNumber = contactNumber;
-            await profileDetails.save();
-            //return response
-            return res.status(200).json({
-                success:true,
-                message:'Profile Updated Successfully',
-                profileDetails,
+          const {currentPassword , changePassword} = req.body;
+
+
+
+          //get userId
+          const id = req.user.id;
+          //validation
+          if(!contactNumber || !gender || !id) {
+              return res.status(400).json({
+                  success:false,
+                  message:'All fields are required',
+              });
+          } 
+
+          
+          if(!currentPassword , !changePassword){
+            return res.status(400).json({
+               success:false,
+               message:"All the feilds are required"
             });
+         }
 
-    }
-    catch(error) {
-        return res.status(500).json({
-            success:false,
-            error:error.message,
+         const user = await User.findById(id);
+
+         if(!user){
+            return res.status(404).json({
+                success:false,
+                message: "User not found"
+            })
+         }
+
+         const isPasswordValid = await bcrypt.compare(currentPassword , user.password);
+
+         
+      if (!isPasswordValid) {
+        return res.status(401).json({
+            success: false,
+            message: 'Invalid current password',
         });
     }
-};  
+
+    const  hashedNewPassword = await bcrypt.hash(changePassword, 10);
+
+    user.password = hashedNewPassword;
+    await  user.save();
+
+    
+          //find profile
+          const userDetails = await User.findById(id);
+          const profileId = userDetails.additionalDetails;
+          const profileDetails = await Profile.findById(profileId);
+
+          //update profile
+          profileDetails.dateOfBirth = dateOfBirth;
+          profileDetails.about = about;
+          profileDetails.gender = gender;
+          profileDetails.contactNumber = contactNumber;
+          await profileDetails.save();
+          //return response
+          return res.status(200).json({
+              success:true,
+              message:'Profile Updated Successfully',
+              profileDetails,
+          });
+
+  }
+  catch(error) {
+      return res.status(500).json({
+          success:false,
+          error:error.message,
+      });
+  }
+};
 
 
 //deleteAccount

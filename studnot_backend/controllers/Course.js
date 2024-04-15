@@ -202,3 +202,68 @@ exports.getCourseDetails = async (req, res) => {
     });
   }
 };
+
+
+exports.searchCourses = async (req, res) => {
+  try {
+    const { query: searchText } = req.query;
+
+    // Check if the search text is provided
+    if (!searchText) {
+      return res.status(400).json({
+        success: false,
+        message: "Search text is required"
+      });
+    }
+
+    // Construct the regex pattern to search for any part of the provided search text
+    const regexPattern = new RegExp(searchText, 'i');
+
+    // Search for courses based on the constructed query
+    const courses = await Course.find({
+      $or: [
+        { courseName: { $regex: regexPattern } },
+        { tags: { $regex: regexPattern } },
+        { category: { $regex: regexPattern } }
+      ]
+    });
+
+    const instructors = await User.find({
+      $and: [
+        { $or: [
+            { firstName: { $regex: regexPattern } },
+            { lastName: { $regex: regexPattern } }
+          ]
+        },
+        { accountType: "Instructor" }
+      ]
+    }).exec();
+
+    const instructorIds = instructors.map(instructor => instructor._id);
+
+    // Find courses associated with the instructors
+    const coursess = await Course.find({ instructor: { $in: instructorIds } });
+
+    if(coursess){
+       return res.status(200).json({
+           success:true,
+           message : "Data fetched succesfully",
+           data: coursess
+       })
+    }
+
+
+    
+
+    return res.status(200).json({
+      success: true,
+      message: "Data fetched successfully",
+      data:courses 
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};

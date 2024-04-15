@@ -14,6 +14,8 @@
     "vercel-build": "prisma generate && vite build"
   },
   "dependencies": {
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-react": "^2.2.1",
     "@heroicons/react": "^2.1.1",
     "@material-tailwind/react": "^2.1.9",
     "@prisma/client": "^5.11.0",

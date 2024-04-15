@@ -19,11 +19,12 @@ exports.auth = async (req, res, next) => {
 		if (!token) {
 			return res.status(401).json({ success: false, message: `Token Missing` });
 		}
+		console.log(token);
 
 		try {
 			// Verifying the JWT using the secret key stored in environment variables
 			const decode = await jwt.verify(token, process.env.JWT_SECRET);
-			console.log(decode);
+			console.log("decoded: ",decode);
 			// Storing the decoded JWT payload in the request object for further use
 			req.user = decode;
 		} catch (error) {

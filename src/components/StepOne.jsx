@@ -56,6 +56,7 @@ const StepOne = () => {
         // Send request with token included in headers
         const response = await axios.post("http://localhost:4000/api/v1/course/createCourse", courseData, { headers });
         console.log('response is:', response);
+        localStorage.setItem("newCourseID",response.data._id);
     } catch (e) {
         // Handle errors
         console.error("Error saving course data:", e);
@@ -105,11 +106,16 @@ const StepOne = () => {
     "web dev",
     "Android Development",
     "Blockchain",
-    "Artificial Intelligence",
     "Data Science",
+    "DevOps",
+    "Artificial Intelligence",
+    "IOT (Internet of Things)",
     "Cloud Computing",
-    "Devops",
-    "CyberSecurity",
+    "Cyber Security",
+    "Machine Learning",
+  "Game Development",
+  "UI/UX Design",
+  "Full Stack Development",
   ];
 
 
