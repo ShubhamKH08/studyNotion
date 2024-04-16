@@ -7,7 +7,7 @@ const sectionSchema = new mongoose.Schema({
 	},
 	courseId: {
 		type: mongoose.Schema.Types.ObjectId,
-			required: true,
+			// required: true,
 			ref: "CourseId",
 	},
 	subSection: [

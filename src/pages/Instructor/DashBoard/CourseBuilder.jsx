@@ -38,7 +38,7 @@ export default function CourseBuilder() {
     localStorage.setItem("lectures", JSON.stringify(lectures));
   }, [lectures]);
 
-  const handleAddLecture = (lectureIndex) => {
+  const handleAddLecture = async(lectureIndex) => {
     const newLectures = [...lectures];
     if (!newLectures[lectureIndex].subLectures) {
       newLectures[lectureIndex].subLectures = [];
@@ -49,26 +49,42 @@ export default function CourseBuilder() {
     }`;
     newLectures[lectureIndex].subLectures.push(newLecture);
     setLectures(newLectures);
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Account-Type": "Instructor",
+    };
+  
+    const storedLectures = JSON.parse(localStorage.getItem('lectures'));
+    const lectureId =storedLectures[lectureIndex]?.lectureId;
+
+    const subsectionData = {
+      title: `SubLecture-${lectures[lectureIndex].subLectures.length + 1}`,
+      courseId: newCourseID,
+      sectionId:lectureId};
+  
+    try {
+      
+      console.log("subsection data:", subsectionData)
+
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/course/addSubSection",
+        subsectionData,
+        { headers }
+      );
+      console.log(response);
+      
+      // Optionally, you can update the local state or perform any other actions after creating the subsection
+    } catch (error) {
+      console.log(error);
+    }
   };
-  //end of reload code
-  // const [lectures, setLectures] = useState([{ lecture: 'Lecture-1' }]);
-
-  // const handleAddLecture = (lectureIndex) => {
-  //   const newLectures = [...lectures];
-  //   if (!newLectures[lectureIndex].subLectures) {
-  //     newLectures[lectureIndex].subLectures = [];
-  //   }
-  //   const lastLecture = newLectures[lectureIndex].lecture;
-  //   const newLecture = `${lastLecture}.${newLectures[lectureIndex].subLectures.length + 1}`;
-  //   newLectures[lectureIndex].subLectures.push(newLecture);
-  //   setLectures(newLectures);
-  // };
-
+  
   const addSection = async () => {
-    setLectures([
-      ...lectures,
-      { lecture: `Lecture-${lectures.length + 1}`, subLectures: [] },
-    ]);
+    // setLectures([
+    //   ...lectures,
+    //   { lecture: `Lecture-${lectures.length + 1}`, subLectures: [] },
+    // ]);
 
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -87,7 +103,13 @@ export default function CourseBuilder() {
         sectionData,
         { headers }
       );
+      const newSectionId = response.data.newSection._id;
+
       console.log(response);
+      setLectures([
+        ...lectures,
+        {  lectureId: newSectionId,lecture: `Lecture-${lectures.length + 1}`, subLectures: [] },
+      ]);
     } catch (e) {
       console.log(e);
     }
@@ -168,6 +190,20 @@ export default function CourseBuilder() {
         // Optionally, handle any error actions here
       });
   };
+
+  //end of reload code
+  // const [lectures, setLectures] = useState([{ lecture: 'Lecture-1' }]);
+
+  // const handleAddLecture = (lectureIndex) => {
+  //   const newLectures = [...lectures];
+  //   if (!newLectures[lectureIndex].subLectures) {
+  //     newLectures[lectureIndex].subLectures = [];
+  //   }
+  //   const lastLecture = newLectures[lectureIndex].lecture;
+  //   const newLecture = `${lastLecture}.${newLectures[lectureIndex].subLectures.length + 1}`;
+  //   newLectures[lectureIndex].subLectures.push(newLecture);
+  //   setLectures(newLectures);
+  // };
 
   return (
     <div className="min-h-40  flex relative">

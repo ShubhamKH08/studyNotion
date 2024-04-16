@@ -20,3 +20,9 @@
 // };
 
 // export default Gallery;
+
+export default function gallery() {
+  return (
+    <div>gallery</div>
+  )
+}
