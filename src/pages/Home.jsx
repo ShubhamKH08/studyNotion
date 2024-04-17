@@ -57,8 +57,8 @@ export default function Home() {
             className="mx-auto  w-[80%]     "
           >
             <video
-              className="z-50 bg-black rounded"
-              style={{ animation: "shadow-less-more 2s infinite" }}
+              className=" shadowAnimation z-50 bg-black rounded"
+              style={{ animation: "shadow-less-more  2s infinite" }}
               autoPlay
               muted
               loop

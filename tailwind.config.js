@@ -3,7 +3,6 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
    
@@ -20,9 +19,18 @@ export default {
         'topbarText':'#DBDDEA',
         'yellowBg':'#FFD60A',
         'grayText':'#999DAA',
-        
-        
       },
+      keyframes: {
+        shadowAnimation: {
+          "0%, 100%": {
+            boxShadow: "none",
+          },
+          "50%": {
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+          },
+        },
+      }
+      
     },
   },
   plugins: [

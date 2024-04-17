@@ -14,10 +14,34 @@ export default function CourseBuilder() {
   const { courseData, setCourseData } = useContext(CourseContext);
   const [token, setToken] = useState("");
   const [newCourseID, setNewCourseID] = useState("");
+  const [oldCourseId, setOldCourseID] = useState(localStorage.getItem("oldCourseId"));
+
+
   useEffect(() => {
     setToken(localStorage.getItem("token:"));
     setNewCourseID(localStorage.getItem("newCourseID"));
-  }, [token, newCourseID]);
+    if(oldCourseId == undefined || oldCourseId == newCourseID) {
+      localStorage.setItem("oldCourseId",newCourseID);
+    }
+    else if(oldCourseId !== newCourseID){
+      localStorage.removeItem("lectures")
+    }
+    setOldCourseID(newCourseID);
+  }, [token, newCourseID,oldCourseId]);
+  
+
+  useEffect(() => {
+    const checkNewCourse = () => {
+      if (oldCourseId === undefined || oldCourseId === newCourseID) {
+        localStorage.setItem("oldCourseId", newCourseID);
+      } else if (oldCourseId !== newCourseID) {
+        localStorage.removeItem("lectures");
+      }
+    };
+  
+    // Call the function when the component mounts
+    checkNewCourse();
+  }, []);// Empty dependency array ensures it runs only once after initial render
 
   const handleChange = (e) => {
     setCourseData({
@@ -28,10 +52,11 @@ export default function CourseBuilder() {
   const [showUploadPopUp, setShowUploadPopUp] = useState(false);
 
   const [lectures, setLectures] = useState(() => {
+  
     const storedLectures = localStorage.getItem("lectures");
     return storedLectures
       ? JSON.parse(storedLectures)
-      : [{ lecture: "Lecture-1" }];
+      : [{ lecture: "" }];
   });
 
   useEffect(() => {
@@ -81,11 +106,6 @@ export default function CourseBuilder() {
   };
   
   const addSection = async () => {
-    // setLectures([
-    //   ...lectures,
-    //   { lecture: `Lecture-${lectures.length + 1}`, subLectures: [] },
-    // ]);
-
     const headers = {
       Authorization: `Bearer ${token}`,
       "Account-Type": "Instructor",
@@ -139,20 +159,20 @@ export default function CourseBuilder() {
     // You can send this data to your backend or manage it as needed
   };
 
-  const handleDeleteLecture = (lectureIndex, subLectureIndex) => {
-    const newLectures = [...lectures];
-    newLectures[lectureIndex].subLectures.splice(subLectureIndex, 1);
-    setLectures(newLectures);
-  };
+  // const handleDeleteLecture = (lectureIndex, subLectureIndex) => {
+  //   const newLectures = [...lectures];
+  //   newLectures[lectureIndex].subLectures.splice(subLectureIndex, 1);
+  //   setLectures(newLectures);
+  // };
 
-  const confirmDeleteLecture = (lectureIndex, subLectureIndex) => {
-    const isConfirmed = window.confirm(
-      "Are you sure you want to delete this lecture?"
-    );
-    if (isConfirmed) {
-      handleDeleteLecture(lectureIndex, subLectureIndex);
-    }
-  };
+  // const confirmDeleteLecture = (lectureIndex, subLectureIndex) => {
+  //   const isConfirmed = window.confirm(
+  //     "Are you sure you want to delete this lecture?"
+  //   );
+  //   if (isConfirmed) {
+  //     handleDeleteLecture(lectureIndex, subLectureIndex);
+  //   }
+  // };
 
   const handleLectureChange = (lectureIndex, newValue) => {
     const newLectures = [...lectures];
