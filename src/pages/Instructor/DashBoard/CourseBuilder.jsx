@@ -63,6 +63,7 @@ export default function CourseBuilder() {
     localStorage.setItem("lectures", JSON.stringify(lectures));
   }, [lectures]);
 
+  // SubSection Adding
   const handleAddLecture = async(lectureIndex) => {
     const newLectures = [...lectures];
     if (!newLectures[lectureIndex].subLectures) {

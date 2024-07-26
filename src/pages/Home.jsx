@@ -4,8 +4,20 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
+import React,{useEffect, useState} from "react";
+import { BiWindows } from "react-icons/bi";
 
 export default function Home() {
+
+  const [relaodState, setReloadState]=useState(false);
+  useEffect(()=>{
+    const firstVisit = sessionStorage.getItem('visited');
+    if(!firstVisit){
+      sessionStorage.setItem('visited', 'true');
+    window.location.reload();
+    }
+  },[relaodState]);
+
   return (
     <div className="w-screen">
       <div className="min-h-screen w-screen inset-0 m-0 ">

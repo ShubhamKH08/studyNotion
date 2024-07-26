@@ -21,6 +21,7 @@ function Navbar() {
  const handleLogOut = ()=>{
   // localStorage.removeItem('token');
   localStorage.removeItem('token:');
+  
  }  
 
   const handleSearchBarToggle = () => {
@@ -43,9 +44,10 @@ function Navbar() {
   // Define array for menu items and sub-menu items
   const menuItems = [
     { title: "Home", link: "/" },
-    { title: "Catalog", subMenu: ["A", "B", "C"] },
+    { title: "Catalog", subMenu: ["Web Development", "Machine Learning", "Cyber Security"] },
     { title: "About Us", link: "/about" },
     { title: "Contact Us", link: "/contact" },
+    {title: "Upload", link:"/uploadcourse"}
   ];
 
   return (
